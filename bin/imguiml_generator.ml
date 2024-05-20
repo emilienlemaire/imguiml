@@ -1,18 +1,38 @@
 open GoblintCil
 
 let filename = Sys.argv.(1)
-let types_output = Sys.argv.(2)
-let enums_output = Sys.argv.(3)
-let base_structs_output = Sys.argv.(4)
-let structs_output = Sys.argv.(5)
+let structs_output = Sys.argv.(2)
+let types_output = Sys.argv.(3)
+let enums_output = Sys.argv.(4)
+let base_structs_output = Sys.argv.(5)
 
 let abstract_structs =
   [ "DockRequest"; "DockNodeSettings"; "TableColumnSortSpecs"; "Context" ]
+
+let has_bit_fields =
+  [
+    "ImGuiDockNode";
+    "ImGuiStackLevelInfo";
+    "ImGuiContext";
+    "ImGuiWindow";
+    "ImGuiTableColumn";
+    "ImGuiTable";
+    "ImGuiTableColumnSettings";
+  ]
+
+let stages =
+  [
+    ("ImVec2", 0);
+    ("ImVec4", 0);
+    ("ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN", 1);
+  ]
 
 module Strs = Set.Make (String)
 
 let defined = ref Strs.empty
 let current_struct = ref ""
+let stage = ref 0
+let max_stage = 1
 
 let pp_header fmt =
   let time = Unix.gmtime (Unix.time ()) in
@@ -256,13 +276,18 @@ let rec pp_ctypes_type ~lift ~mod_name fmt = function
           Format.fprintf fmt "@[<hov>(lift_typ %s.t)@]" enum_module_name
       | TComp ({ cname; _ }, _) when mod_name ->
           let module_name = mangle_struct_name cname in
-            let is_defined = Strs.mem name !defined in
-            if
-              lift
-              && not is_defined
-              && module_name <> !current_struct
-            then Format.fprintf fmt "@[<hov>(lift_typ@ %s)@]" name
-            else Format.fprintf fmt "@[<hov>%s@]" name
+          let is_defined = Strs.mem name !defined in
+          if
+            lift && (not is_defined)
+            && module_name <> !current_struct
+            && not (List.mem module_name abstract_structs)
+            || List.mem cname has_bit_fields
+          then Format.fprintf fmt "@[<hov>(lift_typ@ %s.t)@]" module_name
+          else if module_name = !current_struct then
+            Format.fprintf fmt "@[<hov>t@]"
+          else if List.mem module_name abstract_structs then
+            Format.fprintf fmt "@[<hov>(lift_typ %s)@]" (mangle_name cname)
+          else Format.fprintf fmt "@[<hov>%s.t@]" module_name
       | _ ->
           if lift then Format.fprintf fmt "@[<hov>(lift_typ@ %s)@]" name
           else Format.fprintf fmt "@[<hov>%s@]" name)
@@ -433,35 +458,32 @@ let rec _pp_sig fmt fields =
             ftype)
     fmt fields
 
-let rec pp_fields fmt (fields, prefix_name, type_name) =
+let rec pp_fields fmt fields =
   List.iter
     (fun { fname; ftype; _ } ->
       let field_ml_name = mangle_field_name fname in
       match ftype with
-      | TComp ({ cstruct = false; cfields; _ }, _) ->
-          pp_fields fmt (cfields, prefix_name, type_name)
+      | TComp ({ cstruct = false; cfields; _ }, _) -> pp_fields fmt cfields
       | _ ->
           Format.fprintf fmt
-            "@[<hov 2>@[<hov>let@ %s_%s@ =@]@ @[<hov 2>field@ %s@ %S@ %a@]@]@\n"
-            prefix_name field_ml_name type_name fname
+            "@[<hov 2>@[<hov>let@ %s@ =@]@ @[<hov 2>field@ t@ %S@ %a@]@]@\n"
+            field_ml_name fname
             (pp_ctypes_type ~lift:true ~mod_name:true)
             ftype)
     fields
 
 let pp_struct fmt cname fields =
-  let name = mangle_struct_name cname in
+  let module_name = mangle_struct_name cname in
   let type_name = mangle_name cname in
-  let prefix_name = String.sub type_name 0 (String.length type_name - 2) in
-  current_struct := name;
+  current_struct := module_name;
   Format.fprintf fmt
-    "@[<hov 2>@[<hov>let@ %s@ :@ %s structure typ@]@ =@ @[<hov 2>structure@ \
-     %S@]@]@\n\
-     %a@[<hov>let@ ()@ =@ seal %s@]@\n\
-     @]@\n\
+    "@[<hov 2>@[<hov>module@ %s@ =@ struct@]@\n\
+     @[<hov>type@ t@ =@ %s@ structure@]@\n\
+     @[<hov>let@ t@ :@ t@ typ@ =@ structure@ %S@]@\n\
+     %a@[<hov>let@ ()@ =@ seal@ t@]@]@\n\
+     end@\n\
      @\n"
-    type_name type_name cname pp_fields
-    (fields, prefix_name, type_name)
-    type_name;
+    module_name type_name cname pp_fields fields;
   defined := Strs.add type_name !defined
 
 let pp_base_modules fmt globals =
@@ -470,7 +492,7 @@ let pp_base_modules fmt globals =
        ~pp_sep:(fun fmt () -> Format.fprintf fmt "@,")
        (fun fmt global ->
          match global with
-         | GCompTag ({ cstruct = true; cname; _ }, _) ->
+         | GCompTag ({ cstruct = true; cname; cfields; _ }, _) ->
              if
                String.starts_with ~prefix:"Im" cname
                || String.starts_with ~prefix:"STB" cname
@@ -481,18 +503,21 @@ let pp_base_modules fmt globals =
                Format.fprintf fmt
                  "@[<hov 2>@[<hov>module %s@ =@ struct@]@\n\
                   @[<hov>type@ t@ =@ %s@ structure@]@\n\
-                  @[<hov>let@ t@ :@ t@ typ@ =@ structure@ %S@]@]@\n\
+                  @[<hov>let@ t@ :@ t@ typ@ =@ structure@ %S@]@\n\
+                  %a@[<hov>let@ ()@ =@ seal@ t@]@]@\n\
                   end@\n"
                  module_name type_name cname
+                 (fun fmt fields ->
+                   match List.assoc_opt cname stages with
+                   | Some 0 -> pp_fields fmt fields
+                   | _ -> ())
+                 cfields
          | _ -> ()))
     globals
 
 let pp_structs fmt globals =
   Format.fprintf fmt
-    "@[<hov>open@ Cimgui_enums.Enums@ (Cimgui_enums_generated)@]@\n\
-     @[<hov>module Base = \
-     Cimgui_base_structs.Base(Cimgui_base_structs_generated)@]\n\
-    \     @[<hov 2>@[<hov>module@ Structs@ (S@ :@ Cstubs_structs.TYPE)@ =@ \
+    "%a@[<hov 2>@[<hov>module@ Structs@ (S@ :@ Cstubs_structs.TYPE)@ =@ \
      struct@]@\n\
      @[<hov>open@ S@]@\n\
      %a@]@\n\
@@ -500,12 +525,35 @@ let pp_structs fmt globals =
     (fun fmt ->
       List.iter (fun global ->
           match global with
-          | GCompTag ({ cstruct = true; cname; cfields; _ }, _) ->
-              if
-                String.starts_with ~prefix:"Im" cname
-                || String.starts_with ~prefix:"STB" cname
-                || String.starts_with ~prefix:"Stb" cname
-              then pp_struct fmt cname cfields
+          | GCompTag ({ cstruct = true; cname; cfields; _ }, _)
+            when List.mem cname has_bit_fields -> (
+              match List.assoc_opt cname stages with
+              | Some x when x = !stage -> pp_struct fmt cname cfields
+              | Some _ -> ()
+              | None ->
+                  if !stage > max_stage then
+                    if
+                      String.starts_with ~prefix:"Im" cname
+                      || String.starts_with ~prefix:"STB" cname
+                      || String.starts_with ~prefix:"Stb" cname
+                    then pp_struct fmt cname cfields)
+          | _ -> ()))
+    globals
+    (fun fmt ->
+      List.iter (fun global ->
+          match global with
+          | GCompTag ({ cstruct = true; cname; cfields; _ }, _)
+            when not @@ List.mem cname has_bit_fields -> (
+              match List.assoc_opt cname stages with
+              | Some x when x = !stage -> pp_struct fmt cname cfields
+              | Some _ -> ()
+              | None ->
+                  if !stage > max_stage then
+                    if
+                      String.starts_with ~prefix:"Im" cname
+                      || String.starts_with ~prefix:"STB" cname
+                      || String.starts_with ~prefix:"Stb" cname
+                    then pp_struct fmt cname cfields)
           | _ -> ()))
     globals
 
@@ -646,7 +694,7 @@ let pp_base fmt globals =
   Format.fprintf fmt
     "@[<hov>open@ Ctypes@]@\n\
      @[<hov>open@ Cimgui_types@]@\n\
-     @[<hov 2>module@ Base@ (S@ :@ Cstubs_structs.TYPE)@ =@ struct@\n\
+     @[<hov 2>@[<hov>module@ Base@ (S@ :@ Cstubs_structs.TYPE)@ =@ struct@]@\n\
      @[<hov>open@ S@]@\n\
      %a@]@\n\
      end"
@@ -660,26 +708,42 @@ let () =
   let enums_fmt = Format.formatter_of_out_channel enums_out_c in
   let base_structs_out_c = open_out base_structs_output in
   let base_structs_fmt = Format.formatter_of_out_channel base_structs_out_c in
-  let structs_out_c = open_out structs_output in
-  let structs_fmt = Format.formatter_of_out_channel structs_out_c in
   let globals = file.globals in
   Format.set_geometry ~max_indent:68 ~margin:80;
   pp_header types_fmt;
   Format.fprintf types_fmt "@[<hov>open@ Ctypes@]@\n";
   pp_prolog types_fmt;
   pp_header enums_fmt;
-  pp_header structs_fmt;
-  Format.fprintf structs_fmt "@[<hov>open@ Ctypes@]@\n";
-  Format.fprintf structs_fmt "@[<hov>open@ Cimgui_types@]@\n";
   pp_types types_fmt globals;
   pp_enums enums_fmt globals;
+  stage := 0;
   pp_base base_structs_fmt globals;
-  pp_structs structs_fmt globals;
+  for i = 1 to max_stage + 1 do
+    stage := i;
+    let regexp = Str.regexp "\\.ml" in
+    let rep = Format.sprintf "%d.ml" i in
+    let structs_output = Str.global_replace regexp rep structs_output in
+    let structs_out_c = open_out structs_output in
+    let structs_fmt = Format.formatter_of_out_channel structs_out_c in
+    pp_header structs_fmt;
+    Format.fprintf structs_fmt "@[<hov>open@ Ctypes@]@\n";
+    Format.fprintf structs_fmt "@[<hov>open@ Cimgui_types@]@\n";
+    Format.fprintf structs_fmt
+      "@[<hov>open@ Cimgui_enums.Enums@ (Cimgui_enums_generated)@]@\n\
+       @[<hov>open@ Cimgui_base_structs.Base(Cimgui_base_structs_generated)@]@\n@\n";
+    if i > 1 then
+      (for i = 1 to !stage - 1 do
+        Format.fprintf structs_fmt
+          "@[<hov>open Cimgui_structs%d.Structs(Cimgui_structs%d_generated)@]@\n"
+          i i
+      done;);
+    pp_structs structs_fmt globals;
+    Format.pp_print_flush structs_fmt ();
+    close_out structs_out_c
+  done;
   Format.pp_print_flush types_fmt ();
   Format.pp_print_flush enums_fmt ();
   Format.pp_print_flush base_structs_fmt ();
-  Format.pp_print_flush structs_fmt ();
   close_out types_out_c;
   close_out enums_out_c;
-  close_out base_structs_out_c;
-  close_out structs_out_c
+  close_out base_structs_out_c
