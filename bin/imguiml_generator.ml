@@ -5,6 +5,42 @@ let structs_output = Sys.argv.(2)
 let types_output = Sys.argv.(3)
 let enums_output = Sys.argv.(4)
 let base_structs_output = Sys.argv.(5)
+let bindings_output = Sys.argv.(8)
+
+let replacements =
+  List.map
+    (fun (reg, rep) -> (Str.regexp reg, rep))
+    [
+      ("IO", "Io");
+      ("ImGui", "Im");
+      ("ID", "Id");
+      ("COUNT", "count");
+      ("BEGIN", "Begin");
+      ("END", "End");
+      ("OSX", "Osx");
+      ("SIZE", "Size");
+      ("OFFSET", "Offset");
+      ("SRGB", "Srgb");
+      ("HDR", "Hdr");
+      ("TTY", "Tty");
+      ("FILE", "File");
+      ("STB", "Stb");
+      ("GET", "Get");
+      ("FLT", "Flt");
+      ("MAX", "Max");
+      ("MIN", "Min");
+      ("RGBt", "RgbT");
+      ("RGB", "Rgb");
+      ("HSVt", "HsvT");
+      ("HSV", "Hsv");
+      ("UTF", "Utf");
+      ("UV", "Uv");
+      ("TTF", "Ttf");
+      ("TL", "Tl");
+      ("TR", "Tr");
+      ("BR", "Br");
+      ("BL", "Bl");
+    ]
 
 let abstract_structs =
   [ "DockRequest"; "DockNodeSettings"; "TableColumnSortSpecs"; "Context" ]
@@ -97,27 +133,7 @@ let (>>) a b = a lsr b
 
 |ocaml}
 
-let replacements =
-  List.map
-    (fun (reg, rep) -> (Str.regexp reg, rep))
-    [
-      ("IO", "Io");
-      ("ImGui", "Im");
-      ("ID", "Id");
-      ("COUNT", "count");
-      ("BEGIN", "Begin");
-      ("END", "End");
-      ("OSX", "Osx");
-      ("SIZE", "Size");
-      ("OFFSET", "Offset");
-      ("SRGB", "Srgb");
-      ("HDR", "Hdr");
-      ("TTY", "Tty");
-      ("FILE", "File");
-      ("STB", "Stb");
-    ]
-
-let camlCase_to_snake_case str =
+let camlCase_to_snake_case ?(remove_=false) str =
   let str =
     List.fold_left
       (fun str (reg, rep) -> Str.global_replace reg rep str)
@@ -140,7 +156,14 @@ let camlCase_to_snake_case str =
             false)
       false str
   in
-  Buffer.contents buffer
+  let str = Buffer.contents buffer in
+  if remove_ then
+    if String.starts_with ~prefix:"_" str then
+      String.sub str 1 (String.length str - 1)
+    else
+      str
+  else
+    str
 
 let mangle_name name =
   match name with
@@ -700,6 +723,80 @@ let pp_base fmt globals =
      end"
     pp_base_modules globals
 
+let current_module = ref None
+
+let get_module_name_opt name =
+  let regexp = Str.regexp "^Im[A-Z][a-zA-Z0-9]*_" in
+  let slices = Str.full_split regexp name in
+  match slices with Str.Delim mod_ :: _ -> Some mod_ | _ -> None
+
+let mangle_ig_name name =
+  String.sub name 2 (String.length name - 2) |> camlCase_to_snake_case ~remove_:true
+
+let pp_fun_name curr_mod fmt vname =
+  match curr_mod with
+  | None ->
+      let name = mangle_ig_name vname in
+      Format.fprintf fmt "%s" name
+  | Some mod_ ->
+      let regexp = Str.regexp mod_ in
+      let name = Str.global_replace regexp "" vname |> camlCase_to_snake_case ~remove_:true in
+      Format.fprintf fmt "%s" name
+
+let pp_fun_binding fmt var =
+  match var with
+  | { vname; vtype = TFun _; _ } ->
+      let module_ = get_module_name_opt vname in
+      Format.fprintf fmt "%a@[<hov>let@ %a@ =@ ()@]"
+        (fun fmt mod_name ->
+          (match (mod_name, !current_module) with
+          | None, Some _ -> Format.fprintf fmt "@]@\nend@\n"
+          | Some x, Some y when x = y -> Format.fprintf fmt "@\n"
+          | Some x, Some y when x <> y ->
+              let x = if String.ends_with ~suffix:"_" x then
+                String.sub x 0 (String.length x - 1)
+              else
+                x
+              in
+              Format.fprintf fmt
+                "@]@\nend@\n@[<hov 2>@[<hov>module@ %s@ =@ struct@]@\n" x
+          | Some x, None ->
+              let x = if String.ends_with ~suffix:"_" x then
+                String.sub x 0 (String.length x - 1)
+              else
+                x
+              in
+              Format.fprintf fmt "@\n@[<hov 2>@[<hov>module@ %s@ =@ struct@]@\n"
+                x
+          | _ -> Format.fprintf fmt "@\n");
+          current_module := mod_name)
+        module_
+        (pp_fun_name module_)
+        vname
+  | _ -> ()
+
+let pp_bindings fmt globals =
+  Format.fprintf fmt
+    "@[<hov>open@ Ctypes@]@\n\
+     @[<hov>open@ Cimgui_types@]@\n\
+     @[<hov>open@ Cimgui_enums.Enums@ (Cimgui_enums_generated)@]@\n\
+     @[<hov>open@ Cimgui_base_structs.Structs@ \
+     (Cimgui_base_structs_generated)@]@\n\
+     @[<hov>open@ Cimgui_structs1.Structs@ (Cimgui_structs1_generated)@]@\n\
+     @[<hov>open@ Cimgui_structs2.Structs@ (Cimgui_structs2_generated)@]@\n\
+     @[<hov 2>@[<hov>module@ Bindings@ (F@ :@ Ctypes.FOREIGN)@ =@ struct@]@\n\
+     %a@]@\n\
+     end"
+    (fun fmt ->
+      List.iter (fun global ->
+          match global with
+          | GVarDecl (({ vtype = TFun _; vname; _ } as var), _)
+            when String.starts_with ~prefix:"ig" vname
+                 || String.starts_with ~prefix:"Im" vname ->
+              pp_fun_binding fmt var
+          | _ -> ()))
+    globals
+
 let () =
   let file = Frontc.parse filename () in
   let types_out_c = open_out types_output in
@@ -708,6 +805,8 @@ let () =
   let enums_fmt = Format.formatter_of_out_channel enums_out_c in
   let base_structs_out_c = open_out base_structs_output in
   let base_structs_fmt = Format.formatter_of_out_channel base_structs_out_c in
+  let bindings_out_c = open_out bindings_output in
+  let bindings_fmt = Format.formatter_of_out_channel bindings_out_c in
   let globals = file.globals in
   Format.set_geometry ~max_indent:68 ~margin:80;
   pp_header types_fmt;
@@ -730,20 +829,24 @@ let () =
     Format.fprintf structs_fmt "@[<hov>open@ Cimgui_types@]@\n";
     Format.fprintf structs_fmt
       "@[<hov>open@ Cimgui_enums.Enums@ (Cimgui_enums_generated)@]@\n\
-       @[<hov>open@ Cimgui_base_structs.Base(Cimgui_base_structs_generated)@]@\n@\n";
+       @[<hov>open@ Cimgui_base_structs.Base(Cimgui_base_structs_generated)@]@\n\
+       @\n";
     if i > 1 then
-      (for i = 1 to !stage - 1 do
+      for i = 1 to !stage - 1 do
         Format.fprintf structs_fmt
           "@[<hov>open Cimgui_structs%d.Structs(Cimgui_structs%d_generated)@]@\n"
           i i
-      done;);
+      done;
     pp_structs structs_fmt globals;
     Format.pp_print_flush structs_fmt ();
     close_out structs_out_c
   done;
+  pp_bindings bindings_fmt globals;
   Format.pp_print_flush types_fmt ();
   Format.pp_print_flush enums_fmt ();
   Format.pp_print_flush base_structs_fmt ();
+  Format.pp_print_flush bindings_fmt ();
   close_out types_out_c;
   close_out enums_out_c;
-  close_out base_structs_out_c
+  close_out base_structs_out_c;
+  close_out bindings_out_c

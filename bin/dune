@@ -15,7 +15,8 @@
     cimgui_enums.ml
     cimgui_base_structs.ml
     cimgui_structs1.ml
-    cimgui_structs2.ml)
+    cimgui_structs2.ml
+    cimgui_bindings.ml)
   (deps (:input cimgui.e.c) (:exe imguiml_generator.exe))
   (action
     (run %{exe} %{input} cimgui_structs.ml %{targets})))
