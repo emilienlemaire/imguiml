@@ -5,9 +5,9 @@
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github emilienlemaire/imguiml))
 
-(authors "Author Name")
+(authors "Emilien Lemaire")
 
 (maintainers "Maintainer Name")
 
