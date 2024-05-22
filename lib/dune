@@ -1,2 +1,3 @@
 (library
- (name imguiml))
+ (name imguiml)
+ (public_name imguiml))

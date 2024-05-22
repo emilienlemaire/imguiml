@@ -19,7 +19,8 @@
     cimgui_bindings.ml)
   (deps (:input cimgui.e.c) (:exe imguiml_generator.exe))
   (action
-    (run %{exe} %{input} cimgui_structs.ml %{targets})))
+    (with-stderr-to err.txt
+      (run %{exe} %{input} cimgui_structs.ml %{targets}))))
 
 (library
   (name cimgui_types)
@@ -143,4 +144,88 @@
   (name cimgui_structs1_generated)
   (modules cimgui_structs1_generated)
   (libraries ctypes))
+
+(library
+  (name cimgui_structs2)
+  (modules cimgui_structs2)
+  (libraries
+    cimgui_types
+    cimgui_enums
+    cimgui_enums_generated
+    cimgui_base_structs
+    cimgui_base_structs_generated
+    cimgui_structs1
+    cimgui_structs1_generated
+    ctypes
+    ctypes.stubs))
+
+(executable
+  (name cimgui_structs2_generator)
+  (modules cimgui_structs2_generator)
+  (libraries cimgui_structs2 ctypes ctypes.stubs))
+
+(rule
+  (targets cimgui_structs2_gen.c)
+  (deps cimgui_structs2_generator.exe)
+  (action
+    (run %{deps})))
+
+(rule
+  (targets cimgui_structs2_gen.exe)
+  (deps cimgui_structs2_gen.c)
+  (action
+    (run cc %{deps} -o %{targets}
+         -I%{ocaml_where}
+         -I%{ocaml_where}/../ctypes
+         -I%{env:PWD=.}/cimgui/cimgui)))
+
+(rule
+  (targets cimgui_structs2_generated.ml)
+  (deps cimgui_structs2_gen.exe)
+  (action
+    (with-stdout-to %{targets}
+      (run %{deps}))))
+
+(library
+  (name cimgui_structs2_generated)
+  (modules cimgui_structs2_generated)
+  (libraries ctypes))
+
+(library
+  (name cimgui_bindings)
+  (modules cimgui_bindings)
+  (libraries
+    ctypes
+    cimgui_types
+    cimgui_enums
+    cimgui_enums_generated
+    cimgui_base_structs
+    cimgui_base_structs_generated
+    cimgui_structs1
+    cimgui_structs1_generated
+    cimgui_structs2
+    cimgui_structs2_generated))
+
+(executable
+  (name cimgui_bindings_generator)
+  (modules cimgui_bindings_generator)
+  (libraries cimgui_bindings ctypes))
+
+(rule
+  (targets cimgui_bindings_generated.c cimgui_bindings_generated.ml)
+  (deps cimgui_bindings_generator.exe)
+  (action
+    (run %{deps})))
+
+(library
+  (name cimgui_bindings_generated)
+  (modules cimgui_bindings_generated)
+  (foreign_stubs
+    (language c)
+    (names cimgui_bindings_generated)
+    (flags -I%{env:PWD=.}/cimgui/cimgui
+           -Wno-incompatible-pointer-types
+           -Wno-discarded-qualifiers))
+  (libraries ctypes.stubs))
+
 
