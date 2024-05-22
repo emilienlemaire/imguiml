@@ -24,5 +24,6 @@
 
 (library
   (name cimgui)
+  (public_name cimgui)
   (c_library_flags -lc++)
   (foreign_archives cimgui))

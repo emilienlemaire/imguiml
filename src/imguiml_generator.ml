@@ -44,7 +44,7 @@ let replacements =
       ("DC", "Dc");
     ]
 
-let abstract_structs = [ "DockRequest"; "DockNodeSettings"; "Context" ]
+let abstract_structs = [ "DockRequest"; "DockNodeSettings" ]
 
 let has_bit_fields =
   [
@@ -130,6 +130,7 @@ let stages =
     ("ImGuiTableColumnSortSpecs", 1);
     ("ImVector_ImGuiTableColumnSortSpecs", 1);
     ("ImGuiTableSortSpecs", 1);
+    ("ImGuiNextItemData", 1);
     ("ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN", 1);
   ]
 
@@ -149,7 +150,7 @@ let _not_generated_fun =
 let defined = ref StrMap.empty
 let current_struct = ref ""
 let defined_funcs = Hashtbl.create 1024
-let stage = ref 0
+let stage = ref (-1)
 let max_stage = 1
 
 let () =
@@ -386,9 +387,9 @@ let rec pp_ctypes_type ~in_bindings ~lift ~mod_name fmt = function
               (pp_ctypes_type ~in_bindings ~lift ~mod_name)
               typ
       | _ ->
-          Format.fprintf fmt "@[<hov 2>(ptr@ %a)@]"
-            (pp_ctypes_type ~in_bindings ~lift ~mod_name)
-            typ)
+            Format.fprintf fmt "@[<hov 2>(ptr@ %a)@]"
+              (pp_ctypes_type ~in_bindings ~lift ~mod_name)
+              typ)
   | TArray (typ, size, _) -> (
       match size with
       | Some size ->
@@ -412,32 +413,27 @@ let rec pp_ctypes_type ~in_bindings ~lift ~mod_name fmt = function
           Format.fprintf fmt "@[<hov 2>(lift_typ %s.t)@]" enum_module_name
       | TComp ({ cname; _ }, _) when mod_name ->
           let module_name = mangle_struct_name cname in
-          let is_defined_now =
+          let _is_defined_now =
             StrMap.mem cname !defined && StrMap.find cname !defined = !stage
+          in
+          let is_defined_before =
+            StrMap.mem cname !defined && StrMap.find cname !defined < !stage
           in
           let is_redefined =
             match List.assoc_opt cname redefine_after with
-            | Some (_, x) when !stage >= x ->
-                Format.eprintf "Is redefined TNamed %s\n" cname;
-                true
-            | Some (_, x) ->
-                Format.eprintf "Is not redefined TNamed %d/%d%s\n" !stage x
-                  cname;
-                true
+            | Some (_, x) when !stage > x -> true
+            | Some _ -> true
             | _ -> false
           in
-          if
-            lift && (not is_defined_now)
-            && module_name <> !current_struct
-            && not (List.mem module_name abstract_structs)
-            || List.mem cname has_bit_fields
-            || is_redefined
-          then Format.fprintf fmt "@[<hov 2>(lift_typ@ %s.t)@]" module_name
-          else if module_name = !current_struct then
-            Format.fprintf fmt "@[<hov>t@]"
-          else if List.mem module_name abstract_structs then
-            Format.fprintf fmt "@[<hov 2>(lift_typ %s)@]" (mangle_name cname)
-          else Format.fprintf fmt "@[<hov 2>%s.t@]" module_name
+          if is_defined_before || is_redefined then
+            if lift && not (List.mem module_name abstract_structs) then
+              Format.fprintf fmt "@[<hov 2>(lift_typ@ %s.t)@]" module_name
+            else if lift then
+              Format.fprintf fmt "@[<hov 2>(lift_typ@ %s)@]" (mangle_name cname)
+            else Format.fprintf fmt "%s" (mangle_name cname)
+          else if lift then
+            Format.fprintf fmt "@[<hov 2>(lift_typ@ %s)@]" (mangle_name cname)
+          else Format.fprintf fmt "%s" (mangle_name cname)
       | TNamed ({ tname = base_type; _ }, _) -> (
           match List.assoc_opt tname redefine_after with
           | Some (_, x) when x < !stage ->
@@ -610,7 +606,7 @@ let pp_enum fmt { ename; eitems; _ } =
 
 let pp_enums fmt globals =
   Format.fprintf fmt
-    "@[<hov 2>@[<hov>module@ Enums@ (S@ :@ Cstubs_structs.TYPE)@ =@ struct@]@\n\
+    "@[<hov 2>@[<hov>module@ Enums@ (S@ :@ Ctypes.TYPE)@ =@ struct@]@\n\
      open S@\n\
      %a@]@\n\
      end@\n"
@@ -670,35 +666,35 @@ let pp_base_modules fmt globals =
        ~pp_sep:(fun fmt () -> Format.fprintf fmt "@,")
        (fun fmt global ->
          match global with
-         | GCompTag ({ cstruct = true; cname; cfields; _ }, _) ->
+         | GCompTag ({ cstruct = true; cname; cfields; _ }, _) -> (
              if
                String.starts_with ~prefix:"Im" cname
                || String.starts_with ~prefix:"STB" cname
                || String.starts_with ~prefix:"Stb" cname
              then
-               let module_name = mangle_struct_name cname in
-               let type_name = mangle_name cname in
-               Format.fprintf fmt
-                 "@[<hov 2>@[<hov>module %s@ =@ struct@]@\n\
-                  @[<hov>type@ t@ =@ %s@ structure@]@\n\
-                  @[<hov>let@ t@ :@ t@ typ@ =@ structure@ %S@]@\n\
-                  %a@]@\n\
-                  end@\n"
-                 module_name type_name cname
-                 (fun fmt fields ->
-                   match List.assoc_opt cname stages with
-                   | Some 0 ->
+               match List.assoc_opt cname stages with
+               | Some 0 ->
+                   let module_name = mangle_struct_name cname in
+                   let type_name = mangle_name cname in
+                   Format.fprintf fmt
+                     "@[<hov 2>@[<hov>module %s@ =@ struct@]@\n\
+                      @[<hov>type@ t@ =@ %s@ structure@]@\n\
+                      @[<hov>let@ t@ :@ t@ typ@ =@ structure@ %S@]@\n\
+                      %a@]@\n\
+                      end@\n"
+                     module_name type_name cname
+                     (fun fmt fields ->
                        Format.fprintf fmt "%a@[<hov>let@ ()@ =@ seal@ t@]"
-                         pp_fields fields
-                   | _ -> ())
-                 cfields
+                         pp_fields fields)
+                     cfields;
+                   defined := StrMap.add cname !stage !defined
+               | _ -> ())
          | _ -> ()))
     globals
 
 let pp_structs fmt globals =
   Format.fprintf fmt
-    "%a@[<hov 2>@[<hov>module@ Structs@ (S@ :@ Cstubs_structs.TYPE)@ =@ \
-     struct@]@\n\
+    "%a@[<hov 2>@[<hov>module@ Structs@ (S@ :@ Ctypes.TYPE)@ =@ struct@]@\n\
      @[<hov>open@ S@]@\n\
      %a@]@\n\
      end@\n"
@@ -708,9 +704,7 @@ let pp_structs fmt globals =
           | GCompTag ({ cstruct = true; cname; cfields; _ }, _)
             when List.mem cname has_bit_fields -> (
               match List.assoc_opt cname stages with
-              | Some x when x = !stage ->
-                  Format.eprintf "Printing %s on stage %d" cname x;
-                  pp_struct fmt cname cfields
+              | Some x when x = !stage -> pp_struct fmt cname cfields
               | Some _ -> ()
               | None ->
                   if !stage > max_stage then
@@ -890,7 +884,7 @@ let pp_base fmt globals =
   Format.fprintf fmt
     "@[<hov>open@ Ctypes@]@\n\
      @[<hov>open@ Cimgui_types@]@\n\
-     @[<hov 2>@[<hov>module@ Base@ (S@ :@ Cstubs_structs.TYPE)@ =@ struct@]@\n\
+     @[<hov 2>@[<hov>module@ Base@ (S@ :@ Ctypes.TYPE)@ =@ struct@]@\n\
      @[<hov>open@ S@]@\n\
      %a@]@\n\
      end"
@@ -983,7 +977,9 @@ let pp_bindings fmt globals =
      @[<hov>open@ Cimgui_types@]@\n\
      @[<hov>open@ Cimgui_enums.Enums@ (Cimgui_enums_generated)@]@\n\
      @[<hov>open@ Cimgui_base_structs.Base@ (Cimgui_base_structs_generated)@]@\n\
+     @[<hov>open@ Cimgui_structs1@]@\n\
      @[<hov>open@ Cimgui_structs1.Structs@ (Cimgui_structs1_generated)@]@\n\
+     @[<hov>open@ Cimgui_structs2@]@\n\
      @[<hov>open@ Cimgui_structs2.Structs@ (Cimgui_structs2_generated)@]@\n\
      @[<hov 2>@[<hov>module@ Bindings@ (F@ :@ Ctypes.FOREIGN)@ =@ struct@]@\n\
      @[<hov 2>open@ F@]@\n\

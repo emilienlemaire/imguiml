@@ -23,4 +23,40 @@
  (tags
   (topics "to describe" your project)))
 
+(package
+  (name cimgui_types))
+
+(package
+  (name cimgui_enums))
+
+(package
+  (name cimgui_enums_generated))
+
+(package
+  (name cimgui_base_structs))
+
+(package
+  (name cimgui_base_structs_generated))
+
+(package
+  (name cimgui_structs1))
+
+(package
+  (name cimgui_structs1_generated))
+
+(package
+  (name cimgui_structs2))
+
+(package
+  (name cimgui_structs2_generated))
+
+(package
+  (name cimgui_bindings))
+
+(package
+  (name cimgui_bindings_generated))
+
+(package
+  (name cimgui))
+
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project
