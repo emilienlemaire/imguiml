@@ -1,8 +1,8 @@
 (rule
-  (targets cimgui.e.c)
-  (deps ../cimgui/cimgui/cimgui.h)
-  (action
-    (run %{cc} -E %{deps} -o %{targets} -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1)))
+ (targets cimgui.e.c)
+ (deps ../cimgui/cimgui/cimgui.h)
+ (action
+  (run %{cc} -E %{deps} -o %{targets} -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1)))
 
 (executable
  (name imguiml_generator)
@@ -10,247 +10,276 @@
  (modules imguiml_generator))
 
 (rule
-  (targets 
-    cimgui_types.ml
-    cimgui_enums.ml
-    cimgui_base_structs.ml
-    cimgui_structs1.ml
-    cimgui_structs2.ml
-    cimgui_bindings.ml)
-  (deps (:input cimgui.e.c) (:exe imguiml_generator.exe))
-  (action
-    (with-stderr-to err.txt
-      (run %{exe} %{input} cimgui_structs.ml %{targets}))))
+ (targets
+  cimgui_types.ml
+  cimgui_enums.ml
+  cimgui_base_structs.ml
+  cimgui_structs1.ml
+  cimgui_structs2.ml
+  cimgui_bindings.ml)
+ (deps
+  (:input cimgui.e.c)
+  (:exe imguiml_generator.exe))
+ (action
+  (run %{exe} %{input} cimgui_structs.ml %{targets})))
 
 (library
-  (name cimgui_types)
-  (public_name cimgui_types)
-  (modules cimgui_types)
-  (libraries ctypes ctypes-foreign integers))
+ (name cimgui_types)
+ (public_name imguiml.cimgui_types)
+ (modules cimgui_types)
+ (libraries ctypes ctypes-foreign))
 
 (library
-  (name cimgui_enums)
-  (public_name cimgui_enums)
-  (modules cimgui_enums)
-  (libraries cimgui_types ctypes ctypes.stubs))
+ (name cimgui_enums)
+ (public_name imguiml.cimgui_enums)
+ (modules cimgui_enums)
+ (libraries cimgui_types ctypes ctypes.stubs))
 
 (executable
-  (name cimgui_enums_generator)
-  (modules cimgui_enums_generator)
-  (libraries cimgui_enums ctypes ctypes.stubs))
+ (name cimgui_enums_generator)
+ (modules cimgui_enums_generator)
+ (libraries cimgui_enums ctypes ctypes.stubs))
 
 (rule
-  (targets cimgui_enums_gen.c)
-  (deps cimgui_enums_generator.exe)
-  (action
-    (run %{deps})))
+ (targets cimgui_enums_gen.c)
+ (deps cimgui_enums_generator.exe)
+ (action
+  (run %{deps})))
 
 (rule
-  (targets cimgui_enums_gen.exe)
-  (deps cimgui_enums_gen.c)
-  (action
-    (run cc %{deps} -o %{targets}
-         -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
-         -I%{ocaml_where}
-         -I%{ocaml_where}/../ctypes
-         -I%{env:PWD=.}/cimgui/cimgui)))
+ (targets cimgui_enums_gen.exe)
+ (deps cimgui_enums_gen.c)
+ (action
+  (run
+   cc
+   %{deps}
+   -o
+   %{targets}
+   -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
+   -I%{ocaml_where}
+   -I%{ocaml_where}/../ctypes
+   -I%{env:PWD=.}/cimgui/cimgui)))
 
 (rule
-  (targets cimgui_enums_generated.ml)
-  (deps cimgui_enums_gen.exe)
-  (action
-    (with-stdout-to %{targets}
-      (run %{deps}))))
+ (targets cimgui_enums_generated.ml)
+ (deps cimgui_enums_gen.exe)
+ (action
+  (with-stdout-to
+   %{targets}
+   (run %{deps}))))
 
 (library
-  (name cimgui_enums_generated)
-  (public_name cimgui_enums_generated)
-  (modules cimgui_enums_generated)
-  (libraries ctypes))
+ (name cimgui_enums_generated)
+ (public_name imguiml.cimgui_enums_generated)
+ (modules cimgui_enums_generated)
+ (libraries ctypes))
 
 (library
-  (name cimgui_base_structs)
-  (public_name cimgui_base_structs)
-  (modules cimgui_base_structs)
-  (libraries cimgui_types cimgui_enums cimgui_enums_generated ctypes ctypes.stubs))
+ (name cimgui_base_structs)
+ (public_name imguiml.cimgui_base_structs)
+ (modules cimgui_base_structs)
+ (libraries
+  cimgui_types
+  cimgui_enums
+  cimgui_enums_generated
+  ctypes
+  ctypes.stubs))
 
 (executable
-  (name cimgui_base_structs_generator)
-  (modules cimgui_base_structs_generator)
-  (libraries cimgui_base_structs ctypes ctypes.stubs))
+ (name cimgui_base_structs_generator)
+ (modules cimgui_base_structs_generator)
+ (libraries cimgui_base_structs ctypes ctypes.stubs))
 
 (rule
-  (targets cimgui_base_structs_gen.c)
-  (deps cimgui_base_structs_generator.exe)
-  (action
-    (run %{deps})))
+ (targets cimgui_base_structs_gen.c)
+ (deps cimgui_base_structs_generator.exe)
+ (action
+  (run %{deps})))
 
 (rule
-  (targets cimgui_base_structs_gen.exe)
-  (deps cimgui_base_structs_gen.c)
-  (action
-    (run cc %{deps} -o %{targets}
-         -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
-         -I%{ocaml_where}
-         -I%{ocaml_where}/../ctypes
-         -I%{env:PWD=.}/cimgui/cimgui)))
+ (targets cimgui_base_structs_gen.exe)
+ (deps cimgui_base_structs_gen.c)
+ (action
+  (run
+   cc
+   %{deps}
+   -o
+   %{targets}
+   -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
+   -I%{ocaml_where}
+   -I%{ocaml_where}/../ctypes
+   -I%{env:PWD=.}/cimgui/cimgui)))
 
 (rule
-  (targets cimgui_base_structs_generated.ml)
-  (deps cimgui_base_structs_gen.exe)
-  (action
-    (with-stdout-to %{targets}
-      (run %{deps}))))
+ (targets cimgui_base_structs_generated.ml)
+ (deps cimgui_base_structs_gen.exe)
+ (action
+  (with-stdout-to
+   %{targets}
+   (run %{deps}))))
 
 (library
-  (name cimgui_base_structs_generated)
-  (public_name cimgui_base_structs_generated)
-  (modules cimgui_base_structs_generated)
-  (libraries ctypes))
+ (name cimgui_base_structs_generated)
+ (public_name imguiml.cimgui_base_structs_generated)
+ (modules cimgui_base_structs_generated)
+ (libraries ctypes))
 
 (library
-  (name cimgui_structs1)
-  (public_name cimgui_structs1)
-  (modules cimgui_structs1)
-  (libraries
-    cimgui_types
-    cimgui_enums
-    cimgui_enums_generated
-    cimgui_base_structs
-    cimgui_base_structs_generated
-    ctypes
-    ctypes.stubs
-    ctypes-foreign))
+ (name cimgui_structs1)
+ (public_name imguiml.cimgui_structs1)
+ (modules cimgui_structs1)
+ (libraries
+  cimgui_types
+  cimgui_enums
+  cimgui_enums_generated
+  cimgui_base_structs
+  cimgui_base_structs_generated
+  ctypes
+  ctypes.stubs
+  ctypes-foreign))
 
 (executable
-  (name cimgui_structs1_generator)
-  (modules cimgui_structs1_generator)
-  (libraries cimgui_structs1 ctypes ctypes.stubs))
+ (name cimgui_structs1_generator)
+ (modules cimgui_structs1_generator)
+ (libraries cimgui_structs1 ctypes ctypes.stubs))
 
 (rule
-  (targets cimgui_structs1_gen.c)
-  (deps cimgui_structs1_generator.exe)
-  (action
-    (run %{deps})))
+ (targets cimgui_structs1_gen.c)
+ (deps cimgui_structs1_generator.exe)
+ (action
+  (run %{deps})))
 
 (rule
-  (targets cimgui_structs1_gen.exe)
-  (deps cimgui_structs1_gen.c)
-  (action
-    (run cc %{deps} -o %{targets}
-         -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
-         -I%{ocaml_where}
-         -I%{ocaml_where}/../ctypes
-         -I%{env:PWD=.}/cimgui/cimgui)))
+ (targets cimgui_structs1_gen.exe)
+ (deps cimgui_structs1_gen.c)
+ (action
+  (run
+   cc
+   %{deps}
+   -o
+   %{targets}
+   -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
+   -I%{ocaml_where}
+   -I%{ocaml_where}/../ctypes
+   -I%{env:PWD=.}/cimgui/cimgui)))
 
 (rule
-  (targets cimgui_structs1_generated.ml)
-  (deps cimgui_structs1_gen.exe)
-  (action
-    (with-stdout-to %{targets}
-      (run %{deps}))))
+ (targets cimgui_structs1_generated.ml)
+ (deps cimgui_structs1_gen.exe)
+ (action
+  (with-stdout-to
+   %{targets}
+   (run %{deps}))))
 
 (library
-  (name cimgui_structs1_generated)
-  (public_name cimgui_structs1_generated)
-  (modules cimgui_structs1_generated)
-  (libraries ctypes))
+ (name cimgui_structs1_generated)
+ (public_name imguiml.cimgui_structs1_generated)
+ (modules cimgui_structs1_generated)
+ (libraries ctypes))
 
 (library
-  (name cimgui_structs2)
-  (public_name cimgui_structs2)
-  (modules cimgui_structs2)
-  (libraries
-    cimgui_types
-    cimgui_enums
-    cimgui_enums_generated
-    cimgui_base_structs
-    cimgui_base_structs_generated
-    cimgui_structs1
-    cimgui_structs1_generated
-    ctypes
-    ctypes.stubs
-    ctypes-foreign))
+ (name cimgui_structs2)
+ (public_name imguiml.cimgui_structs2)
+ (modules cimgui_structs2)
+ (libraries
+  cimgui_types
+  cimgui_enums
+  cimgui_enums_generated
+  cimgui_base_structs
+  cimgui_base_structs_generated
+  cimgui_structs1
+  cimgui_structs1_generated
+  ctypes
+  ctypes.stubs
+  ctypes-foreign))
 
 (executable
-  (name cimgui_structs2_generator)
-  (modules cimgui_structs2_generator)
-  (libraries cimgui_structs2 ctypes ctypes.stubs))
+ (name cimgui_structs2_generator)
+ (modules cimgui_structs2_generator)
+ (libraries cimgui_structs2 ctypes ctypes.stubs))
 
 (rule
-  (targets cimgui_structs2_gen.c)
-  (deps cimgui_structs2_generator.exe)
-  (action
-    (run %{deps})))
+ (targets cimgui_structs2_gen.c)
+ (deps cimgui_structs2_generator.exe)
+ (action
+  (run %{deps})))
 
 (rule
-  (targets cimgui_structs2_gen.exe)
-  (deps cimgui_structs2_gen.c)
-  (action
-    (run cc %{deps} -o %{targets}
-         -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
-         -I%{ocaml_where}
-         -I%{ocaml_where}/../ctypes
-         -I%{env:PWD=.}/cimgui/cimgui)))
+ (targets cimgui_structs2_gen.exe)
+ (deps cimgui_structs2_gen.c)
+ (action
+  (run
+   cc
+   %{deps}
+   -o
+   %{targets}
+   -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
+   -I%{ocaml_where}
+   -I%{ocaml_where}/../ctypes
+   -I%{env:PWD=.}/cimgui/cimgui)))
 
 (rule
-  (targets cimgui_structs2_generated.ml)
-  (deps cimgui_structs2_gen.exe)
-  (action
-    (with-stdout-to %{targets}
-      (run %{deps}))))
+ (targets cimgui_structs2_generated.ml)
+ (deps cimgui_structs2_gen.exe)
+ (action
+  (with-stdout-to
+   %{targets}
+   (run %{deps}))))
 
 (library
-  (name cimgui_structs2_generated)
-  (public_name cimgui_structs2_generated)
-  (modules cimgui_structs2_generated)
-  (libraries ctypes))
+ (name cimgui_structs2_generated)
+ (public_name imguiml.cimgui_structs2_generated)
+ (modules cimgui_structs2_generated)
+ (libraries ctypes))
 
 (library
-  (name cimgui_bindings)
-  (modules cimgui_bindings)
-  (public_name cimgui_bindings)
-  (libraries
-    ctypes
-    ctypes.stubs
-    ctypes-foreign
-    cimgui_types
-    cimgui_enums
-    cimgui_enums_generated
-    cimgui_base_structs
-    cimgui_base_structs_generated
-    cimgui_structs1
-    cimgui_structs1_generated
-    cimgui_structs2
-    cimgui_structs2_generated))
+ (name cimgui_bindings)
+ (public_name imguiml.cimgui_bindings)
+ (modules cimgui_bindings)
+ (libraries
+  ctypes
+  ctypes.stubs
+  ctypes-foreign
+  cimgui_types
+  cimgui_enums
+  cimgui_enums_generated
+  cimgui_base_structs
+  cimgui_base_structs_generated
+  cimgui_structs1
+  cimgui_structs1_generated
+  cimgui_structs2
+  cimgui_structs2_generated))
 
 (executable
-  (name cimgui_bindings_generator)
-  (modules cimgui_bindings_generator)
-  (libraries cimgui_bindings ctypes))
+ (name cimgui_bindings_generator)
+ (modules cimgui_bindings_generator)
+ (libraries cimgui_bindings ctypes))
 
 (rule
-  (targets cimgui_bindings_generated.c cimgui_bindings_generated.ml)
-  (deps cimgui_bindings_generator.exe)
-  (action
-    (run %{deps})))
+ (targets cimgui_bindings_generated.c cimgui_bindings_generated.ml)
+ (deps cimgui_bindings_generator.exe)
+ (action
+  (run %{deps})))
 
 (library
-  (name cimgui_bindings_generated)
-  (modules cimgui_bindings_generated)
-  (public_name cimgui_bindings_generated)
-  (foreign_stubs
-    (language c)
-    (names cimgui_bindings_generated)
-    (flags -I%{env:PWD=.}/cimgui/cimgui
-           -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
-           -Wno-incompatible-pointer-types
-           -Wno-discarded-qualifiers))
-  (libraries ctypes.stubs))
+ (name cimgui_bindings_generated)
+ (public_name imguiml.cimgui_bindings_generated)
+ (modules cimgui_bindings_generated)
+ (foreign_stubs
+  (language c)
+  (names cimgui_bindings_generated)
+  (flags
+   -I%{env:PWD=.}/cimgui/cimgui
+   -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
+   -Wno-incompatible-pointer-types
+   -Wno-discarded-qualifiers))
+ (libraries ctypes.stubs))
 
 (library
-  (name imguiml)
-  (public_name imguiml)
-  (modules imgui)
-  (libraries cimgui cimgui_bindings cimgui_bindings_generated))
-
+ (name imguiml)
+ (public_name imguiml)
+ (modules imgui)
+ (libraries
+  imguiml.cimgui
+  imguiml.cimgui_bindings
+  imguiml.cimgui_bindings_generated))

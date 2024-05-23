@@ -1,5 +1,4 @@
 (lang dune 3.15)
-
 (name imguiml)
 
 (generate_opam_files true)
@@ -7,11 +6,11 @@
 (source
  (github emilienlemaire/imguiml))
 
-(authors "Emilien Lemaire")
+(authors "Emilien Lemaire <emilien.lem@icloud.com>")
 
-(maintainers "Maintainer Name")
+(maintainers "Emilien Lemaire <emilien.lem@icloud.com>")
 
-(license LICENSE)
+(license MIT)
 
 (documentation https://url/to/documentation)
 
@@ -19,44 +18,12 @@
  (name imguiml)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune)
+ (depends ocaml
+          dune
+          goblint-cil
+          ctypes
+          ctypes-foreign)
  (tags
-  (topics "to describe" your project)))
-
-(package
-  (name cimgui_types))
-
-(package
-  (name cimgui_enums))
-
-(package
-  (name cimgui_enums_generated))
-
-(package
-  (name cimgui_base_structs))
-
-(package
-  (name cimgui_base_structs_generated))
-
-(package
-  (name cimgui_structs1))
-
-(package
-  (name cimgui_structs1_generated))
-
-(package
-  (name cimgui_structs2))
-
-(package
-  (name cimgui_structs2_generated))
-
-(package
-  (name cimgui_bindings))
-
-(package
-  (name cimgui_bindings_generated))
-
-(package
-  (name cimgui))
+  (graphics imgui ctypes bindings)))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project
