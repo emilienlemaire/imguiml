@@ -1,8 +1,8 @@
 (lang dune 3.15)
 (name imguiml)
-
+(using directory-targets 0.1)
 (generate_opam_files true)
-
+(version 0.1.0)
 (source
  (github emilienlemaire/imguiml))
 
@@ -16,8 +16,8 @@
 
 (package
  (name imguiml)
- (synopsis "A short synopsis")
- (description "A longer description")
+ (synopsis "ImGUI bindings to OCaml")
+ (description "ImGUI bindings to OCaml")
  (depends ocaml
           dune
           goblint-cil
