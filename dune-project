@@ -22,7 +22,8 @@
           dune
           goblint-cil
           ctypes
-          ctypes-foreign)
+          ctypes-foreign
+          (ppx_expect :with-test))
  (tags
   (graphics imgui ctypes bindings)))
 

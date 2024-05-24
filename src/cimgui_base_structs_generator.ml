@@ -14,6 +14,3 @@ let main () =
   close_out c_structs_out
 
 let () = main ()
-
-
-

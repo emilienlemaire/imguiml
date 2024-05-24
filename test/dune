@@ -1,3 +1,6 @@
-(test
+(library
  (name test_imguiml)
+ (inline_tests)
+ (preprocess
+  (pps ppx_expect))
  (libraries imguiml))

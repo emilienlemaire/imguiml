@@ -1,6 +1,6 @@
 (rule
  (targets cimgui.e.c)
- (deps ../cimgui/cimgui.h)
+ (deps ../cimgui/cimgui/cimgui.h)
  (action
   (run %{cc} -E %{deps} -o %{targets} -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1)))
 
@@ -58,7 +58,7 @@
    -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
    -I%{ocaml_where}
    -I%{ocaml_where}/../ctypes
-   -I%{env:PWD=.}/cimgui)))
+   -I%{env:PWD=.}/cimgui/cimgui)))
 
 (rule
  (targets cimgui_enums_generated.ml)
@@ -108,7 +108,7 @@
    -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
    -I%{ocaml_where}
    -I%{ocaml_where}/../ctypes
-   -I%{env:PWD=.}/cimgui)))
+   -I%{env:PWD=.}/cimgui/cimgui)))
 
 (rule
  (targets cimgui_base_structs_generated.ml)
@@ -161,7 +161,7 @@
    -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
    -I%{ocaml_where}
    -I%{ocaml_where}/../ctypes
-   -I%{env:PWD=.}/cimgui)))
+   -I%{env:PWD=.}/cimgui/cimgui)))
 
 (rule
  (targets cimgui_structs1_generated.ml)
@@ -216,7 +216,7 @@
    -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
    -I%{ocaml_where}
    -I%{ocaml_where}/../ctypes
-   -I%{env:PWD=.}/cimgui)))
+   -I%{env:PWD=.}/cimgui/cimgui)))
 
 (rule
  (targets cimgui_structs2_generated.ml)
@@ -269,7 +269,7 @@
   (language c)
   (names cimgui_bindings_generated)
   (flags
-   -I%{env:PWD=.}/cimgui
+   -I%{env:PWD=.}/cimgui/cimgui
    -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
    -Wno-incompatible-pointer-types
    -Wno-discarded-qualifiers))

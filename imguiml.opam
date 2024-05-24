@@ -17,6 +17,7 @@ depends: [
   "ctypes"
   "ctypes-foreign"
   "odoc" {with-doc}
+  "ppx_expect" {with-test}
 ]
 depexts: [
   ["cmake"]

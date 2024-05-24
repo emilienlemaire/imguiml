@@ -14,4 +14,3 @@ let main () =
   close_out c_enums_out
 
 let () = main ()
-

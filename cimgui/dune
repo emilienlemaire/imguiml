@@ -1,0 +1,31 @@
+(data_only_dirs cimgui)
+
+(rule
+ (deps
+  (source_tree cimgui))
+ (targets libcimgui.a dllcimgui.so)
+ (action
+  (no-infer
+   (progn
+    (chdir
+     cimgui
+     (progn
+      (run mkdir -p build_static build_dynamic)))
+    (chdir
+     cimgui/build_static
+     (progn
+      (run cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DIMGUI_STATIC=yes ..)
+      (run make)))
+    (chdir
+     cimgui/build_dynamic
+     (progn
+      (run cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..)
+      (run make)))
+    (copy cimgui/build_dynamic/cimgui.so dllcimgui.so)
+    (copy cimgui/build_static/cimgui.a libcimgui.a)))))
+
+(library
+ (name cimgui)
+ (public_name imguiml.cimgui)
+ (c_library_flags -lc++)
+ (foreign_archives cimgui))

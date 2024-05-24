@@ -21,7 +21,7 @@ open Ctypes
 
 let null typ = Ctypes.from_voidp typ Ctypes.null
 
-let () =
+let%expect_test "imgui" =
   Format.printf "Creating context: %s@\n" (Bindings.get_version ());
   assert (
     Bindings.debug_check_version_and_data_layout (Bindings.get_version ())
@@ -43,7 +43,6 @@ let () =
     io |-> Types.Io.display_size <-@ !@display_size;
     io |-> Types.Io.delta_time <-@ 1. /. 60.;
     Bindings.new_frame ();
-
     let _ =
       Bindings.begin_ "Main window" (null bool)
         (Int64.to_int Types.WindowFlags.no_title_bar)
@@ -63,4 +62,32 @@ let () =
   Format.printf "%u@\n" (Int64.to_int Types.WindowFlags.no_title_bar);
   Format.printf "size: %d@\n" (sizeof Types.WindowFlags.t);
   Format.printf "DestroyContext()\n";
-  Bindings.destroy_context (null Types.Context.t)
+  Bindings.destroy_context (null Types.Context.t);
+  [%expect
+    {|
+    Creating context: 1.90.6
+    New frame: 0
+    New frame: 1
+    New frame: 2
+    New frame: 3
+    New frame: 4
+    New frame: 5
+    New frame: 6
+    New frame: 7
+    New frame: 8
+    New frame: 9
+    New frame: 10
+    New frame: 11
+    New frame: 12
+    New frame: 13
+    New frame: 14
+    New frame: 15
+    New frame: 16
+    New frame: 17
+    New frame: 18
+    New frame: 19
+    New frame: 20
+    1
+    size: 4
+    DestroyContext()
+    |}]

@@ -387,9 +387,9 @@ let rec pp_ctypes_type ~in_bindings ~lift ~mod_name fmt = function
               (pp_ctypes_type ~in_bindings ~lift ~mod_name)
               typ
       | _ ->
-            Format.fprintf fmt "@[<hov 2>(ptr@ %a)@]"
-              (pp_ctypes_type ~in_bindings ~lift ~mod_name)
-              typ)
+          Format.fprintf fmt "@[<hov 2>(ptr@ %a)@]"
+            (pp_ctypes_type ~in_bindings ~lift ~mod_name)
+            typ)
   | TArray (typ, size, _) -> (
       match size with
       | Some size ->
