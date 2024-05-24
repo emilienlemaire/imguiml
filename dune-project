@@ -1,7 +1,7 @@
 (lang dune 3.15)
 (name imguiml)
 (using directory-targets 0.1)
-(generate_opam_files true)
+(generate_opam_files false)
 (version 0.1.0)
 (source
  (github emilienlemaire/imguiml))
