@@ -8,7 +8,7 @@ authors: ["Emilien Lemaire <emilien.lem@icloud.com>"]
 license: "MIT"
 tags: ["graphics" "imgui" "ctypes" "bindings"]
 homepage: "https://github.com/emilienlemaire/imguiml"
-doc: "https://url/to/documentation"
+doc: "https://emilienlemaire.github.io/imguiml"
 bug-reports: "https://github.com/emilienlemaire/imguiml/issues"
 depends: [
   "ocaml"
@@ -17,6 +17,7 @@ depends: [
   "ctypes"
   "ctypes-foreign"
   "odoc" {with-doc}
+  "sherlodoc" {with-doc}
   "ppx_expect" {with-test}
 ]
 depexts: [

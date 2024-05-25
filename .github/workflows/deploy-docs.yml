@@ -16,6 +16,9 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -36,9 +39,8 @@ jobs:
       - name: deploy docs
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.TOKEN }}
           publish_dir: ./_build/default/_doc/_html
           enable_jekyll: false
           allow_empty_commit: false
           force_orphan: true
-          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}

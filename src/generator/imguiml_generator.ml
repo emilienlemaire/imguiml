@@ -991,13 +991,24 @@ let pp_fun_binding fmt var =
 let pp_bindings fmt globals =
   Format.fprintf fmt
     "@[<hov>open@ Ctypes@]@\n\
-     @[<hov>open@ Cimgui_types@]@\n\
-     @[<hov>open@ Cimgui_enums.Enums@ (Cimgui_enums_generated)@]@\n\
-     @[<hov>open@ Cimgui_base_structs.Base@ (Cimgui_base_structs_generated)@]@\n\
-     @[<hov>open@ Cimgui_structs1@]@\n\
-     @[<hov>open@ Cimgui_structs1.Structs@ (Cimgui_structs1_generated)@]@\n\
-     @[<hov>open@ Cimgui_structs2@]@\n\
-     @[<hov>open@ Cimgui_structs2.Structs@ (Cimgui_structs2_generated)@]@\n\
+     @[<hov 2>@[<hov>module@ Types@ =@ struct@]@\n\
+     @[<hov>include@ Cimgui_types@]@\n\
+     @[<hov>include@ Cimgui_enums.Enums@ (Cimgui_enums_generated)@]@\n\
+     @[<hov>include@ Cimgui_base_structs.Base@ (Cimgui_base_structs_generated)@]@\n\
+     @[<hov>module@ NextItemData@ =@ Cimgui_structs1.NextItemData@]@\n\
+     @[<hov>module@ TableColumnSortSpecs@ =@ Cimgui_structs1.TableColumnSortSpecs@]@\n\
+     @[<hov>include@ Cimgui_structs1.Structs@ (Cimgui_structs1_generated)@]@\n\
+     @[<hov>module@ FontGlyph@ =@ Cimgui_structs2.FontGlyph@]@\n\
+     @[<hov>module@ DockNode@ =@ Cimgui_structs2.DockNode@]@\n\
+     @[<hov>module@ StackLevelInfo@ =@ Cimgui_structs2.StackLevelInfo@]@\n\
+     @[<hov>module@ Context@ =@ Cimgui_structs2.Context@]@\n\
+     @[<hov>module@ Window@ =@ Cimgui_structs2.Window@]@\n\
+     @[<hov>module@ TableColumn@ =@ Cimgui_structs2.TableColumn@]@\n\
+     @[<hov>module@ Table@ =@ Cimgui_structs2.Table@]@\n\
+     @[<hov>module@ TableColumnSettings@ =@ Cimgui_structs2.TableColumnSettings@]@\n\
+     @[<hov>include@ Cimgui_structs2.Structs@ (Cimgui_structs2_generated)@]@]@\n\
+     end@\n\
+     @[<hov>open Types@]@\n\
      @[<hov 2>@[<hov>module@ Bindings@ (F@ :@ Ctypes.FOREIGN)@ =@ struct@]@\n\
      @[<hov 2>open@ F@]@\n\
      %a%a@]@\n\

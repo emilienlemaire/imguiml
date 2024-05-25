@@ -1,0 +1,11 @@
+{0 Imguiml}
+
+{1 Imguiml Library}
+
+Imguiml provides bindings to {{: https://github.com/ocornut/imgui } Dear ImGUI } in ocaml by using
+{{: https://github.com/cimgui/cimgui } cimgui } as the C interface.
+
+The bindings and stubs are generated automatically with
+{{: https://github.com/emilienlemaire/imguiml/blob/main/src/generator/imguiml_generator.ml} imguiml_generator}.
+
+To check the available bindings please look at the {!module-Imguiml} module.

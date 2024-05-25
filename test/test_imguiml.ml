@@ -1,4 +1,4 @@
-open Imguiml.Imgui
+open Imguiml
 
 let bigarray_create k len = Bigarray.(Array1.create k c_layout len)
 

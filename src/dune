@@ -337,7 +337,7 @@
 (library
  (name imguiml)
  (public_name imguiml)
- (modules imgui)
+ (modules imguiml)
  (libraries
   imguiml.cimgui
   imguiml.cimgui_bindings
