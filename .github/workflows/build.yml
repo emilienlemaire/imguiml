@@ -26,12 +26,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install gcc MacOS
-        run: |
-          brew install gcc
-          brew link gcc
-        if: matrix.os == 'macos-latest'
-
       - name: Use OCaml ${{ matrix.ocaml-compiler }}
         uses: ocaml/setup-ocaml@v2
         with:
@@ -43,25 +37,15 @@ jobs:
         with:
           ocaml-compiler: ${{ matrix.ocaml-compiler }}
           allow-prerelease-opam: true
-          opam-repositories: git+https://github.com/dra27/opam-repository.git#windows-initial
         if: matrix.os == 'windows-latest'
 
       - name: Install dependencies
         run: |
           opam install . --with-test --deps-only
 
-      - name: Build project on MacOS
-        run: |
-          opam exec -- dune build
-        env:
-          CC: gcc-14
-          CXX: gcc-14
-        if: matrix.os == 'macos-latest'
-
       - name: Build project
         run: |
           opam exec -- dune build
-        if: matrix.os != 'macos-latest'
 
       - name: Run tests
         run: |
