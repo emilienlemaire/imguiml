@@ -2,7 +2,7 @@
 (name imguiml)
 (using directory-targets 0.1)
 (generate_opam_files false)
-(version 1.90.6)
+(version v1.90.6)
 (source
  (github emilienlemaire/imguiml))
 

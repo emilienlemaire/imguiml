@@ -52,6 +52,7 @@
 
 (library
  (name cimgui)
- (public_name imguiml.cimgui)
- (c_library_flags -lc++)
+ (package imguiml)
+ (c_library_flags -lstdc++)
  (foreign_archives cimgui))
+
