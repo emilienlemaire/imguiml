@@ -36,18 +36,6 @@ module Bindings = struct
    are accessible via modules that have the same name as the Dear ImGUI class they
    belong to. *)
 
-  (**/**)
-
-  module type BINDINGS =
-    module type of Cimgui_bindings with module Types = Types
-
-  (**/**)
-
-  module Cimgui__bindings : BINDINGS = Cimgui_bindings
-
-  module Calculated__Bindings =
-    Cimgui__bindings.Bindings (Cimgui_bindings_generated)
-
-  include Calculated__Bindings
+  include Cimgui_bindings.Bindings (Cimgui_bindings_generated)
   (** @inline *)
 end
