@@ -1,4 +1,3 @@
 (executable
  (name imguiml_generator)
  (libraries goblint-cil))
-

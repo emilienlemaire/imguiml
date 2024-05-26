@@ -9,3 +9,9 @@ The bindings and stubs are generated automatically with
 {{: https://github.com/emilienlemaire/imguiml/blob/main/src/generator/imguiml_generator.ml} imguiml_generator}.
 
 To check the available bindings please look at the {!module-Imguiml} module.
+
+{1 Imguiml.imgui_impl Library}
+
+This package also provide bindings to [ImGui_Impl] for [OpenGL3] and [Glfw], they are
+accessible with the [imguiml.imguiml_impl] library. You can check the available functions
+in the {!module-Imguiml_impl}

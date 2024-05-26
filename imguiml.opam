@@ -1,6 +1,12 @@
 opam-version: "2.0"
 synopsis: "ImGUI bindings to OCaml"
-description: "ImGUI bindings to OCaml"
+description: """
+Imguiml provides bindings to ImGui and ImGui_Impl for GLFW and OpenGL3 in OCaml,
+through cimgui.
+The version follows the version of ImGui for which the package is providing
+bindings.
+The docking branch is the only one for which we provide bindings.
+"""
 maintainer: ["Emilien Lemaire <emilien.lem@icloud.com>"]
 authors: ["Emilien Lemaire <emilien.lem@icloud.com>"]
 license: "MIT"
@@ -11,12 +17,14 @@ bug-reports: "https://github.com/emilienlemaire/imguiml/issues"
 depends: [
   "ocaml" {>= "4.08"}
   "dune" {>= "3.15"}
-  "goblint-cil"
+  "goblint-cil" {>= "2.0.0"}
   "ctypes"
   "ctypes-foreign" {>= "0.21.1"}
   "odoc" {with-doc}
   "sherlodoc" {with-doc}
   "ppx_expect" {with-test}
+  "conf-glew"
+  "conf-glfw3"
 ]
 depexts: [
   ["gcc" "cmake"]
@@ -36,3 +44,4 @@ build: [
   ]
 ]
 dev-repo: "git+https://github.com/emilienlemaire/imguiml.git"
+available: arch != "s390x"

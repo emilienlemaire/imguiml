@@ -417,8 +417,7 @@ let rec pp_ctypes_type ~in_bindings ~lift ~mod_name fmt = function
           let module_name = mangle_struct_name cname in
           let is_defined_before =
             match List.assoc_opt cname stages with
-            | Some defined_stage when defined_stage < !stage ->
-                true
+            | Some defined_stage when defined_stage < !stage -> true
             | _ when in_bindings -> true
             | _ -> false
           in
@@ -994,9 +993,11 @@ let pp_bindings fmt globals =
      @[<hov 2>@[<hov>module@ Types@ =@ struct@]@\n\
      @[<hov>include@ Cimgui_types@]@\n\
      @[<hov>include@ Cimgui_enums.Enums@ (Cimgui_enums_generated)@]@\n\
-     @[<hov>include@ Cimgui_base_structs.Base@ (Cimgui_base_structs_generated)@]@\n\
+     @[<hov>include@ Cimgui_base_structs.Base@ \
+     (Cimgui_base_structs_generated)@]@\n\
      @[<hov>module@ NextItemData@ =@ Cimgui_structs1.NextItemData@]@\n\
-     @[<hov>module@ TableColumnSortSpecs@ =@ Cimgui_structs1.TableColumnSortSpecs@]@\n\
+     @[<hov>module@ TableColumnSortSpecs@ =@ \
+     Cimgui_structs1.TableColumnSortSpecs@]@\n\
      @[<hov>include@ Cimgui_structs1.Structs@ (Cimgui_structs1_generated)@]@\n\
      @[<hov>module@ FontGlyph@ =@ Cimgui_structs2.FontGlyph@]@\n\
      @[<hov>module@ DockNode@ =@ Cimgui_structs2.DockNode@]@\n\
@@ -1005,7 +1006,8 @@ let pp_bindings fmt globals =
      @[<hov>module@ Window@ =@ Cimgui_structs2.Window@]@\n\
      @[<hov>module@ TableColumn@ =@ Cimgui_structs2.TableColumn@]@\n\
      @[<hov>module@ Table@ =@ Cimgui_structs2.Table@]@\n\
-     @[<hov>module@ TableColumnSettings@ =@ Cimgui_structs2.TableColumnSettings@]@\n\
+     @[<hov>module@ TableColumnSettings@ =@ \
+     Cimgui_structs2.TableColumnSettings@]@\n\
      @[<hov>include@ Cimgui_structs2.Structs@ (Cimgui_structs2_generated)@]@]@\n\
      end@\n\
      @[<hov>open Types@]@\n\

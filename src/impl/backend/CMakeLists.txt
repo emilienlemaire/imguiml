@@ -31,4 +31,9 @@ endif()
 target_compile_definitions(${PROJECT_NAME} PUBLIC 
     -DCIMGUI_USE_OPENGL3
     -DCIMGUI_USE_GLFW)
-target_link_libraries(${PROJECT_NAME} cimgui glfw GLEW::GLEW)
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+    find_package(OpenGL REQUIRED)
+    target_link_libraries(${PROJECT_NAME} cimgui glfw GLEW::GLEW OpenGL::GL)
+else()
+    target_link_libraries(${PROJECT_NAME} cimgui glfw GLEW::GLEW)
+endif()

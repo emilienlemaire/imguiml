@@ -8,14 +8,15 @@
  (deps
   (:input cimgui.e.c)
   (:exe generator/imguiml_generator.exe))
- (targets
-  cimgui_types.ml)
+ (targets cimgui_types.ml)
  (mode promote)
- (enabled_if (= %{ocaml-config:system} linux))
+ (enabled_if
+  (= %{ocaml-config:system} linux))
  (locks g)
  (action
-   (with-stdout-to %{targets}
-    (run ./generator/imguiml_generator.exe cimgui.e.c types))))
+  (with-stdout-to
+   %{targets}
+   (run ./generator/imguiml_generator.exe cimgui.e.c types))))
 
 (library
  (name cimgui_types)
@@ -27,14 +28,15 @@
  (deps
   (:input cimgui.e.c)
   (:exe generator/imguiml_generator.exe))
- (targets
-  cimgui_enums.ml)
+ (targets cimgui_enums.ml)
  (mode promote)
- (enabled_if (= %{ocaml-config:system} linux))
+ (enabled_if
+  (= %{ocaml-config:system} linux))
  (locks g)
  (action
-   (with-stdout-to %{targets}
-    (run ./generator/imguiml_generator.exe cimgui.e.c enums))))
+  (with-stdout-to
+   %{targets}
+   (run ./generator/imguiml_generator.exe cimgui.e.c enums))))
 
 (library
  (name cimgui_enums)
@@ -85,14 +87,15 @@
  (deps
   (:input cimgui.e.c)
   (:exe generator/imguiml_generator.exe))
- (targets
-  cimgui_base_structs.ml)
+ (targets cimgui_base_structs.ml)
  (mode promote)
- (enabled_if (= %{ocaml-config:system} linux))
+ (enabled_if
+  (= %{ocaml-config:system} linux))
  (locks g)
  (action
-   (with-stdout-to %{targets}
-    (run ./generator/imguiml_generator.exe cimgui.e.c base))))
+  (with-stdout-to
+   %{targets}
+   (run ./generator/imguiml_generator.exe cimgui.e.c base))))
 
 (library
  (name cimgui_base_structs)
@@ -148,14 +151,15 @@
  (deps
   (:input cimgui.e.c)
   (:exe generator/imguiml_generator.exe))
- (targets
-  cimgui_structs1.ml)
+ (targets cimgui_structs1.ml)
  (mode promote)
- (enabled_if (= %{ocaml-config:system} linux))
+ (enabled_if
+  (= %{ocaml-config:system} linux))
  (locks g)
  (action
-   (with-stdout-to %{targets}
-    (run ./generator/imguiml_generator.exe cimgui.e.c 1))))
+  (with-stdout-to
+   %{targets}
+   (run ./generator/imguiml_generator.exe cimgui.e.c 1))))
 
 (library
  (name cimgui_structs1)
@@ -214,14 +218,15 @@
  (deps
   (:input cimgui.e.c)
   (:exe generator/imguiml_generator.exe))
- (targets
-  cimgui_structs2.ml)
+ (targets cimgui_structs2.ml)
  (mode promote)
- (enabled_if (= %{ocaml-config:system} linux))
+ (enabled_if
+  (= %{ocaml-config:system} linux))
  (locks g)
  (action
-   (with-stdout-to %{targets}
-    (run ./generator/imguiml_generator.exe cimgui.e.c 2))))
+  (with-stdout-to
+   %{targets}
+   (run ./generator/imguiml_generator.exe cimgui.e.c 2))))
 
 (library
  (name cimgui_structs2)
@@ -282,14 +287,15 @@
  (deps
   (:input cimgui.e.c)
   (:exe generator/imguiml_generator.exe))
- (targets
-  cimgui_bindings.ml)
+ (targets cimgui_bindings.ml)
  (mode promote)
- (enabled_if (= %{ocaml-config:system} linux))
+ (enabled_if
+  (= %{ocaml-config:system} linux))
  (locks g)
  (action
-   (with-stdout-to %{targets}
-    (run ./generator/imguiml_generator.exe cimgui.e.c bindings))))
+  (with-stdout-to
+   %{targets}
+   (run ./generator/imguiml_generator.exe cimgui.e.c bindings))))
 
 (library
  (name cimgui_bindings)
@@ -328,6 +334,7 @@
   (language c)
   (names cimgui_bindings_generated)
   (flags
+   -fPIC
    -I%{env:PWD=.}/cimgui/cimgui
    -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1
    -Wno-incompatible-pointer-types

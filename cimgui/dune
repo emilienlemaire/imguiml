@@ -4,7 +4,8 @@
  (deps
   (source_tree cimgui))
  (targets libcimgui.a dllcimgui.so)
- (enabled_if (= %{ocaml-config:system} linux))
+ (enabled_if
+  (<> %{ocaml-config:system} macosx))
  (alias cimgui)
  (action
   (no-infer
@@ -30,7 +31,8 @@
  (deps
   (source_tree cimgui))
  (targets libcimgui.a dllcimgui.so)
- (enabled_if (= %{ocaml-config:system} macosx))
+ (enabled_if
+  (= %{ocaml-config:system} macosx))
  (action
   (no-infer
    (progn
@@ -55,6 +57,7 @@
  (name cimgui)
  (public_name imguiml.cimgui)
  (c_library_flags -lstdc++)
- (public_headers cimgui/cimgui.h (glob_files cimgui/imgui/*.h))
+ (public_headers
+  cimgui/cimgui.h
+  (glob_files cimgui/imgui/*.h))
  (foreign_archives cimgui))
-
