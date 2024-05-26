@@ -33,13 +33,6 @@ jobs:
         uses: ocaml/setup-ocaml@v2
         with:
           ocaml-compiler: ${{ matrix.ocaml-compiler }}
-        if: matrix.os != 'windows-latest'
-
-      - name: Use OCaml ${{ matrix.ocaml-compiler }} on Windows
-        uses: ocaml/setup-ocaml@v2
-        with:
-          ocaml-compiler: ${{ matrix.ocaml-compiler }}
-        if: matrix.os == 'windows-latest'
 
       - name: Install dependencies
         run: |
@@ -48,6 +41,12 @@ jobs:
       - name: Build project
         run: |
           opam exec -- dune build
+        if: matrix.os != "macos-latest"
+
+      - name: Build project on macOS
+        run: |
+          opam exec -- dune build --profile macosx
+        if: matrix.os == "macos-latest"
 
       - name: Run tests
         run: |

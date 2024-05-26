@@ -41,6 +41,7 @@ build: [
     "@install"
     "@runtest" {with-test}
     "@doc" {with-doc}
+    "--profile" "macosx" {os = "macos"}
   ]
 ]
 dev-repo: "git+https://github.com/emilienlemaire/imguiml.git"

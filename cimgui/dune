@@ -6,6 +6,7 @@
  (targets libcimgui.a dllcimgui.so)
  (enabled_if
   (<> %{ocaml-config:system} macosx))
+ (locks c)
  (alias cimgui)
  (action
   (no-infer
@@ -33,6 +34,7 @@
  (targets libcimgui.a dllcimgui.so)
  (enabled_if
   (= %{ocaml-config:system} macosx))
+ (locks c)
  (action
   (no-infer
    (progn

@@ -15,7 +15,9 @@
  (deps
   (source_tree backend)
   (alias_rec ../../cimgui/cimgui))
+  (enabled_if (<> %{ocaml-config:system} macosx))
  (targets libimguiml_impl.a dllimguiml_impl.so)
+ (locks c)
  (action
   (no-infer
    (progn
@@ -35,6 +37,31 @@
     (copy backend/build_dynamic/libcimgui_impl.so dllimguiml_impl.so)
     (copy backend/build_static/libcimgui_impl.a libimguiml_impl.a)))))
 
+(rule
+ (deps
+  (source_tree backend)
+  (alias_rec ../../cimgui/cimgui))
+  (enabled_if (= %{ocaml-config:system} macosx))
+ (targets libimguiml_impl.a dllimguiml_impl.so)
+ (locks c)
+ (action
+  (no-infer
+   (progn
+    (chdir
+     backend
+     (run mkdir -p build_static build_dynamic))
+    (chdir
+     backend/build_static
+     (progn
+      (run cmake .. -DIMGUI_STATIC=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo)
+      (run make)))
+    (chdir
+     backend/build_dynamic
+     (progn
+      (run cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo)
+      (run make)))
+    (copy backend/build_dynamic/cimgui_impl.dylib dllimguiml_impl.so)
+    (copy backend/build_static/libcimgui_impl.a libimguiml_impl.a)))))
 (library
  (name imguiml_impl_foreign)
  (public_name imguiml.imguiml_impl_foreign)
@@ -47,6 +74,10 @@
  (action
   (run %{deps})))
 
+(env
+  (macosx
+    (c_flags -framework OpenGL)))
+
 (library
  (name imguiml_impl_generated)
  (public_name imguiml.imguiml_impl_generated)
@@ -55,6 +86,7 @@
   (language c)
   (names imguiml_impl_stubs)
   (flags
+   :standard
    -I%{env:PWD=.}/cimgui/cimgui
    -I%{env:PWD=.}/cimgui/cimgui/generator/output
    -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1))

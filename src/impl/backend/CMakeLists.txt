@@ -16,9 +16,15 @@ add_definitions("-DIMGUI_IMPL_API=extern \"C\" ")
 
 if(IMGUI_STATIC)
     add_library(cimgui STATIC IMPORTED)
-    set_target_properties(cimgui PROPERTIES
-	IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../cimgui/libcimgui.a
-	INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/../../../cimgui/cimgui)
+    if(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+	set_target_properties(cimgui PROPERTIES
+	    IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../cimgui/libcimgui.a
+	    INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/../../../cimgui/cimgui)
+    else()
+	set_target_properties(cimgui PROPERTIES
+	    IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../cimgui/libcimgui.a
+	    INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/../../../cimgui/cimgui)
+    endif()
     add_library(${PROJECT_NAME} STATIC imgui_impl_opengl3.cpp imgui_impl_glfw.cpp)
 else()
     add_library(cimgui SHARED IMPORTED)
