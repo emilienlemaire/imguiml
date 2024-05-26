@@ -1,0 +1,65 @@
+(data_only_dirs backend)
+
+(library
+  (name imguiml_impl_bindings)
+  (public_name imguiml.imguiml_impl_bindings)
+  (modules imguiml_impl_bindings)
+  (libraries imguiml ctypes ctypes-foreign))
+
+
+(executable
+  (name imguiml_impl_generator)
+  (modules imguiml_impl_generator)
+  (libraries imguiml_impl_bindings ctypes ctypes.stubs))
+
+(rule
+  (deps (source_tree backend) (alias_rec ../../cimgui/cimgui))
+  (targets libimguiml_impl.a dllimguiml_impl.so)
+  (action
+    (no-infer
+      (progn
+        (chdir backend
+               (run mkdir -p build_static build_dynamic))
+        (chdir backend/build_static
+               (progn
+                 (run cmake .. -DIMGUI_STATIC=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo)
+                 (run make)))
+        (chdir backend/build_dynamic
+               (progn
+                 (run cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo)
+                 (run make)))
+        (copy backend/build_dynamic/libcimgui_impl.so dllimguiml_impl.so)
+        (copy backend/build_static/libcimgui_impl.a libimguiml_impl.a)))))
+
+(library
+  (name imguiml_impl_foreign)
+  (public_name imguiml.imguiml_impl_foreign)
+  (modules )
+  (foreign_archives imguiml_impl))
+
+(rule
+  (targets imguiml_impl_generated.ml imguiml_impl_stubs.c)
+  (deps imguiml_impl_generator.exe)
+  (action
+    (run %{deps})))
+
+(library
+  (name imguiml_impl_generated)
+  (public_name imguiml.imguiml_impl_generated)
+  (modules imguiml_impl_generated)
+  (foreign_stubs
+    (language c)
+    (names imguiml_impl_stubs)
+    (flags
+      -I%{env:PWD=.}/cimgui/cimgui
+      -I%{env:PWD=.}/cimgui/cimgui/generator/output
+      -DCIMGUI_DEFINE_ENUMS_AND_STRUCTS=1))
+  (libraries ctypes.stubs imguiml_impl_foreign))
+
+(library
+  (name imguiml_impl)
+  (public_name imguiml.imguiml_impl)
+  (modules imguiml_impl)
+  (libraries imguiml_impl_bindings imguiml_impl_generated imguiml_impl_foreign))
+
+

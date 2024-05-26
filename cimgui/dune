@@ -5,6 +5,7 @@
   (source_tree cimgui))
  (targets libcimgui.a dllcimgui.so)
  (enabled_if (= %{ocaml-config:system} linux))
+ (alias cimgui)
  (action
   (no-infer
    (progn
