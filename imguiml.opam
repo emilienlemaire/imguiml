@@ -41,8 +41,20 @@ build: [
     "@install"
     "@runtest" {with-test}
     "@doc" {with-doc}
-    "--profile" "macosx" {os = "macos"}
-  ]
+  ] { os != "macos"}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+    "--profile"
+    "macosx"
+  ] { os = "macos" }
 ]
 dev-repo: "git+https://github.com/emilienlemaire/imguiml.git"
 available: arch != "s390x"
