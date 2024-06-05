@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>ImDrawList (imguiml.Cimgui_bindings.Bindings.ImDrawList)</title><meta charset="utf-8"/><link rel="stylesheet" href="../../../../odoc.support/odoc.css"/><meta name="generator" content="odoc 2.4.2"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><script src="../../../../odoc.support/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><script>let base_url = '../../../../';
+let search_urls = ['../../../db.js','../../../../sherlodoc.js'];
+</script><script src="../../../../odoc.support/odoc_search.js" defer="defer"></script></head><body class="odoc"><nav class="odoc-nav"><a href="../index.html">Up</a> – <a href="../../../index.html">imguiml</a> &#x00BB; <a href="../../index.html">Cimgui_bindings</a> &#x00BB; <a href="../index.html">Bindings</a> &#x00BB; ImDrawList</nav><div class="odoc-search"><div class="search-inner"><input class="search-bar" placeholder="🔎 Search..."/><div class="search-snake"></div><div class="search-result"></div></div></div><header class="odoc-preamble"><h1>Module <code><span>Bindings.ImDrawList</span></code></h1></header><div class="odoc-content"><div class="odoc-spec"><div class="spec value anchored" id="val-im_draw_list"><a href="#val-im_draw_list" class="anchor"></a><code><span><span class="keyword">val</span> im_draw_list : 
+  <span><span>(<span><span><a href="../../Types/DrawListSharedData/index.html#type-t">Types.DrawListSharedData.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-destroy"><a href="#val-destroy" class="anchor"></a><code><span><span class="keyword">val</span> destroy : <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-push_clip_rect"><a href="#val-push_clip_rect" class="anchor"></a><code><span><span class="keyword">val</span> push_clip_rect : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>bool <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-push_clip_rect_full_screen"><a href="#val-push_clip_rect_full_screen" class="anchor"></a><code><span><span class="keyword">val</span> push_clip_rect_full_screen : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-pop_clip_rect"><a href="#val-pop_clip_rect" class="anchor"></a><code><span><span class="keyword">val</span> pop_clip_rect : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-push_texture_id"><a href="#val-push_texture_id" class="anchor"></a><code><span><span class="keyword">val</span> push_texture_id : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-texture_id_t">Types.texture_id_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-pop_texture_id"><a href="#val-pop_texture_id" class="anchor"></a><code><span><span class="keyword">val</span> pop_texture_id : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-get_clip_rect_min"><a href="#val-get_clip_rect_min" class="anchor"></a><code><span><span class="keyword">val</span> get_clip_rect_min : 
+  <span><span>(<span><span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-get_clip_rect_max"><a href="#val-get_clip_rect_max" class="anchor"></a><code><span><span class="keyword">val</span> get_clip_rect_max : 
+  <span><span>(<span><span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_line"><a href="#val-add_line" class="anchor"></a><code><span><span class="keyword">val</span> add_line : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_rect"><a href="#val-add_rect" class="anchor"></a><code><span><span class="keyword">val</span> add_rect : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-draw_flags_t">Types.draw_flags_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_rect_filled"><a href="#val-add_rect_filled" class="anchor"></a><code><span><span class="keyword">val</span> add_rect_filled : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-draw_flags_t">Types.draw_flags_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_rect_filled_multi_color"><a href="#val-add_rect_filled_multi_color" class="anchor"></a><code><span><span class="keyword">val</span> add_rect_filled_multi_color : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_quad"><a href="#val-add_quad" class="anchor"></a><code><span><span class="keyword">val</span> add_quad : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_quad_filled"><a href="#val-add_quad_filled" class="anchor"></a><code><span><span class="keyword">val</span> add_quad_filled : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_triangle"><a href="#val-add_triangle" class="anchor"></a><code><span><span class="keyword">val</span> add_triangle : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_triangle_filled"><a href="#val-add_triangle_filled" class="anchor"></a><code><span><span class="keyword">val</span> add_triangle_filled : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_circle"><a href="#val-add_circle" class="anchor"></a><code><span><span class="keyword">val</span> add_circle : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_circle_filled"><a href="#val-add_circle_filled" class="anchor"></a><code><span><span class="keyword">val</span> add_circle_filled : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_ngon"><a href="#val-add_ngon" class="anchor"></a><code><span><span class="keyword">val</span> add_ngon : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_ngon_filled"><a href="#val-add_ngon_filled" class="anchor"></a><code><span><span class="keyword">val</span> add_ngon_filled : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_ellipse"><a href="#val-add_ellipse" class="anchor"></a><code><span><span class="keyword">val</span> add_ellipse : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_ellipse_filled"><a href="#val-add_ellipse_filled" class="anchor"></a><code><span><span class="keyword">val</span> add_ellipse_filled : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_text_vec2"><a href="#val-add_text_vec2" class="anchor"></a><code><span><span class="keyword">val</span> add_text_vec2 : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>string <span class="arrow">&#45;&gt;</span></span>
+    <span>string <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_text_font_ptr"><a href="#val-add_text_font_ptr" class="anchor"></a><code><span><span class="keyword">val</span> add_text_font_ptr : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><span><a href="../../Types/Font/index.html#type-t">Types.Font.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>string <span class="arrow">&#45;&gt;</span></span>
+    <span>string <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span><span><a href="../../Types/Vec4/index.html#type-t">Types.Vec4.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_bezier_cubic"><a href="#val-add_bezier_cubic" class="anchor"></a><code><span><span class="keyword">val</span> add_bezier_cubic : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_bezier_quadratic"><a href="#val-add_bezier_quadratic" class="anchor"></a><code><span><span class="keyword">val</span> add_bezier_quadratic : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_polyline"><a href="#val-add_polyline" class="anchor"></a><code><span><span class="keyword">val</span> add_polyline : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-draw_flags_t">Types.draw_flags_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_convex_poly_filled"><a href="#val-add_convex_poly_filled" class="anchor"></a><code><span><span class="keyword">val</span> add_convex_poly_filled : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_concave_poly_filled"><a href="#val-add_concave_poly_filled" class="anchor"></a><code><span><span class="keyword">val</span> add_concave_poly_filled : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_image"><a href="#val-add_image" class="anchor"></a><code><span><span class="keyword">val</span> add_image : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-texture_id_t">Types.texture_id_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_image_quad"><a href="#val-add_image_quad" class="anchor"></a><code><span><span class="keyword">val</span> add_image_quad : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-texture_id_t">Types.texture_id_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_image_rounded"><a href="#val-add_image_rounded" class="anchor"></a><code><span><span class="keyword">val</span> add_image_rounded : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-texture_id_t">Types.texture_id_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-draw_flags_t">Types.draw_flags_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_clear"><a href="#val-path_clear" class="anchor"></a><code><span><span class="keyword">val</span> path_clear : <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_line_to"><a href="#val-path_line_to" class="anchor"></a><code><span><span class="keyword">val</span> path_line_to : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_line_to_merge_duplicate"><a href="#val-path_line_to_merge_duplicate" class="anchor"></a><code><span><span class="keyword">val</span> path_line_to_merge_duplicate : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_fill_convex"><a href="#val-path_fill_convex" class="anchor"></a><code><span><span class="keyword">val</span> path_fill_convex : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_fill_concave"><a href="#val-path_fill_concave" class="anchor"></a><code><span><span class="keyword">val</span> path_fill_concave : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_stroke"><a href="#val-path_stroke" class="anchor"></a><code><span><span class="keyword">val</span> path_stroke : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-draw_flags_t">Types.draw_flags_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_arc_to"><a href="#val-path_arc_to" class="anchor"></a><code><span><span class="keyword">val</span> path_arc_to : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_arc_to_fast"><a href="#val-path_arc_to_fast" class="anchor"></a><code><span><span class="keyword">val</span> path_arc_to_fast : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_elliptical_arc_to"><a href="#val-path_elliptical_arc_to" class="anchor"></a><code><span><span class="keyword">val</span> path_elliptical_arc_to : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_bezier_cubic_curve_to"><a href="#val-path_bezier_cubic_curve_to" class="anchor"></a><code><span><span class="keyword">val</span> path_bezier_cubic_curve_to : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_bezier_quadratic_curve_to"><a href="#val-path_bezier_quadratic_curve_to" class="anchor"></a><code><span><span class="keyword">val</span> path_bezier_quadratic_curve_to : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_rect"><a href="#val-path_rect" class="anchor"></a><code><span><span class="keyword">val</span> path_rect : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-draw_flags_t">Types.draw_flags_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_callback"><a href="#val-add_callback" class="anchor"></a><code><span><span class="keyword">val</span> add_callback : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-draw_callback_t">Types.draw_callback_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><span>unit <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-add_draw_cmd"><a href="#val-add_draw_cmd" class="anchor"></a><code><span><span class="keyword">val</span> add_draw_cmd : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-clone_output"><a href="#val-clone_output" class="anchor"></a><code><span><span class="keyword">val</span> clone_output : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-channels_split"><a href="#val-channels_split" class="anchor"></a><code><span><span class="keyword">val</span> channels_split : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>int <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-channels_merge"><a href="#val-channels_merge" class="anchor"></a><code><span><span class="keyword">val</span> channels_merge : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-channels_set_current"><a href="#val-channels_set_current" class="anchor"></a><code><span><span class="keyword">val</span> channels_set_current : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>int <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-prim_reserve"><a href="#val-prim_reserve" class="anchor"></a><code><span><span class="keyword">val</span> prim_reserve : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>int <span class="arrow">&#45;&gt;</span></span> <span>int <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-prim_unreserve"><a href="#val-prim_unreserve" class="anchor"></a><code><span><span class="keyword">val</span> prim_unreserve : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>int <span class="arrow">&#45;&gt;</span></span> <span>int <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-prim_rect"><a href="#val-prim_rect" class="anchor"></a><code><span><span class="keyword">val</span> prim_rect : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-prim_rect_uv"><a href="#val-prim_rect_uv" class="anchor"></a><code><span><span class="keyword">val</span> prim_rect_uv : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-prim_quad_uv"><a href="#val-prim_quad_uv" class="anchor"></a><code><span><span class="keyword">val</span> prim_quad_uv : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-prim_write_vtx"><a href="#val-prim_write_vtx" class="anchor"></a><code><span><span class="keyword">val</span> prim_write_vtx : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-prim_write_idx"><a href="#val-prim_write_idx" class="anchor"></a><code><span><span class="keyword">val</span> prim_write_idx : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-draw_idx_t">Types.draw_idx_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-prim_vtx"><a href="#val-prim_vtx" class="anchor"></a><code><span><span class="keyword">val</span> prim_vtx : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/index.html#type-u32_t">Types.u32_t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-reset_for_new_frame"><a href="#val-reset_for_new_frame" class="anchor"></a><code><span><span class="keyword">val</span> reset_for_new_frame : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-clear_free_memory"><a href="#val-clear_free_memory" class="anchor"></a><code><span><span class="keyword">val</span> clear_free_memory : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-pop_unused_draw_cmd"><a href="#val-pop_unused_draw_cmd" class="anchor"></a><code><span><span class="keyword">val</span> pop_unused_draw_cmd : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-try_merge_draw_cmds"><a href="#val-try_merge_draw_cmds" class="anchor"></a><code><span><span class="keyword">val</span> try_merge_draw_cmds : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-on_changed_clip_rect"><a href="#val-on_changed_clip_rect" class="anchor"></a><code><span><span class="keyword">val</span> on_changed_clip_rect : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-on_changed_texture_id"><a href="#val-on_changed_texture_id" class="anchor"></a><code><span><span class="keyword">val</span> on_changed_texture_id : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-on_changed_vtx_offset"><a href="#val-on_changed_vtx_offset" class="anchor"></a><code><span><span class="keyword">val</span> on_changed_vtx_offset : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>unit <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-calc_circle_auto_segment_count"><a href="#val-calc_circle_auto_segment_count" class="anchor"></a><code><span><span class="keyword">val</span> calc_circle_auto_segment_count : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span> <span>float <span class="arrow">&#45;&gt;</span></span> <span>int <span class="xref-unresolved">F</span>.return</span>)</span> <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_arc_to_fast_ex"><a href="#val-path_arc_to_fast_ex" class="anchor"></a><code><span><span class="keyword">val</span> path_arc_to_fast_ex : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div><div class="odoc-spec"><div class="spec value anchored" id="val-path_arc_to_n"><a href="#val-path_arc_to_n" class="anchor"></a><code><span><span class="keyword">val</span> path_arc_to_n : 
+  <span><span>(<span><span><a href="../../Types/DrawList/index.html#type-t">Types.DrawList.t</a> <span class="xref-unresolved">Ctypes_static</span>.ptr</span> <span class="arrow">&#45;&gt;</span></span>
+    <span><a href="../../Types/Vec2/index.html#type-t">Types.Vec2.t</a> <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>float <span class="arrow">&#45;&gt;</span></span>
+    <span>int <span class="arrow">&#45;&gt;</span></span>
+    <span>unit <span class="xref-unresolved">F</span>.return</span>)</span>
+    <span class="xref-unresolved">F</span>.result</span></span></code></div></div></div></body></html>
