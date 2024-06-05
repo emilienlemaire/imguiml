@@ -57,4 +57,4 @@ build: [
   ] { os = "macos" }
 ]
 dev-repo: "git+https://github.com/emilienlemaire/imguiml.git"
-available: arch != "s390x"
+available: arch != "s390x" & arch != "arm64"
