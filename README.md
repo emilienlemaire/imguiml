@@ -1,9 +1,19 @@
-# Imguiml
+# Imguiml-ft
 
 This library contains bindings to [Dear ImGui](https://github.com/ocornut/imgui) using the
 [cimgui](https://github.com/cimgui/cimgui) bindings.
 
-Check the [documentation](https://emilienlemaire.github.io/imguiml) to find the bindings.
+It is a fork of [imguiml](https://github.com/emilienlemaire/imguiml),
+updated to Dear ImGui 1.93.0 and loading fonts with FreeType, published
+as `imguiml-ft` so as not to be mistaken for it. The modules are those
+of imguiml (`Imguiml`, `Imguiml_impl`); the libraries are under
+`imguiml-ft`.
+
+Imguiml is the work of Emilien Lemaire: its binding generator, which
+reads cimgui's header and writes the bindings, is the bulk of this
+package. The fork is maintained by Frédéric Bour.
+
+Check the [documentation](https://let-def.github.io/imguiml) to find the bindings.
 
 ## Versions
 
@@ -28,14 +38,14 @@ See [CHANGELOG.md](CHANGELOG.md) for what changed from 1.90.6.
 
 ## Libraries
 
-- `imguiml`: Dear ImGui, with its internal API (`imgui_internal.h`) and
+- `imguiml-ft`: Dear ImGui, with its internal API (`imgui_internal.h`) and
   FreeType's.
-- `imguiml.imguiml_impl`: ImGui's GLFW and OpenGL3 backends.
+- `imguiml-ft.imguiml_impl`: ImGui's GLFW and OpenGL3 backends.
 
 ## Building
 
 Besides the opam dependencies, the build needs CMake, a C and a C++
-compiler, and FreeType; `imguiml.imguiml_impl` needs GLFW 3, GLEW and
+compiler, and FreeType; `imguiml-ft.imguiml_impl` needs GLFW 3, GLEW and
 OpenGL. The opam package asks for them through `conf-*` packages.
 
 ```sh

@@ -6,14 +6,16 @@ through cimgui.
 The version follows the version of ImGui for which the package is providing
 bindings.
 The docking branch is the only one for which we provide bindings.
+Fonts are loaded with FreeType.
+This is a fork of imguiml, updated to recent versions of ImGui.
 """
-maintainer: ["Emilien Lemaire <emilien.lem@icloud.com>"]
-authors: ["Emilien Lemaire <emilien.lem@icloud.com>"]
+maintainer: ["Frédéric Bour <frederic.bour@lakaban.net>"]
+authors: ["Emilien Lemaire <emilien.lem@icloud.com>" "Frédéric Bour <frederic.bour@lakaban.net>"]
 license: "MIT"
 tags: ["graphics" "imgui" "ctypes" "bindings"]
-homepage: "https://github.com/emilienlemaire/imguiml"
-doc: "https://emilienlemaire.github.io/imguiml"
-bug-reports: "https://github.com/emilienlemaire/imguiml/issues"
+homepage: "https://github.com/let-def/imguiml"
+doc: "https://let-def.github.io/imguiml"
+bug-reports: "https://github.com/let-def/imguiml/issues"
 depends: [
   "ocaml" {>= "4.08"}
   "dune" {>= "3.15"}
@@ -56,4 +58,4 @@ build: [
     "macosx"
   ] { os = "macos" }
 ]
-dev-repo: "git+https://github.com/emilienlemaire/imguiml.git"
+dev-repo: "git+https://github.com/let-def/imguiml.git"

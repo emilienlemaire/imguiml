@@ -6,12 +6,12 @@ Imguiml provides bindings to {{: https://github.com/ocornut/imgui } Dear ImGUI }
 {{: https://github.com/cimgui/cimgui } cimgui } as the C interface.
 
 The bindings and stubs are generated automatically with
-{{: https://github.com/emilienlemaire/imguiml/blob/main/src/generator/imguiml_generator.ml} imguiml_generator}.
+{{: https://github.com/let-def/imguiml/blob/main/src/generator/imguiml_generator.ml} imguiml_generator}.
 
 To check the available bindings please look at the {!module-Imguiml} module.
 
 {1 Imguiml.imgui_impl Library}
 
 This package also provide bindings to [ImGui_Impl] for [OpenGL3] and [Glfw], they are
-accessible with the [imguiml.imguiml_impl] library. You can check the available functions
+accessible with the [imguiml-ft.imguiml_impl] library. You can check the available functions
 in the {!module-Imguiml_impl}

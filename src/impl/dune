@@ -2,7 +2,7 @@
 
 (library
  (name imguiml_impl_bindings)
- (public_name imguiml.imguiml_impl_bindings)
+ (public_name imguiml-ft.imguiml_impl_bindings)
  (modules imguiml_impl_bindings)
  (libraries imguiml ctypes ctypes-foreign))
 
@@ -63,7 +63,7 @@
 
 (library
  (name imguiml_impl_foreign)
- (public_name imguiml.imguiml_impl_foreign)
+ (public_name imguiml-ft.imguiml_impl_foreign)
  (modules)
  (foreign_archives imguiml_impl))
 
@@ -79,7 +79,7 @@
 
 (library
  (name imguiml_impl_generated)
- (public_name imguiml.imguiml_impl_generated)
+ (public_name imguiml-ft.imguiml_impl_generated)
  (modules imguiml_impl_generated)
  (foreign_stubs
   (language c)
@@ -92,7 +92,7 @@
 
 (library
  (name imguiml_impl)
- (public_name imguiml.imguiml_impl)
+ (public_name imguiml-ft.imguiml_impl)
  (modules imguiml_impl)
  (libraries
   imguiml_impl_bindings

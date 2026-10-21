@@ -1,21 +1,21 @@
 (lang dune 3.15)
-(name imguiml)
+(name imguiml-ft)
 (using directory-targets 0.1)
 (generate_opam_files false)
 (version v1.93.0)
 (source
- (github emilienlemaire/imguiml))
+ (github let-def/imguiml))
 
-(authors "Emilien Lemaire <emilien.lem@icloud.com>")
+(authors "Emilien Lemaire <emilien.lem@icloud.com>" "Frédéric Bour <frederic.bour@lakaban.net>")
 
-(maintainers "Emilien Lemaire <emilien.lem@icloud.com>")
+(maintainers "Frédéric Bour <frederic.bour@lakaban.net>")
 
 (license MIT)
 
-(documentation https://emilienlemaire.github.io/imguiml)
+(documentation https://let-def.github.io/imguiml)
 
 (package
- (name imguiml)
+ (name imguiml-ft)
  (synopsis "ImGUI bindings to OCaml")
  (description "ImGUI bindings to OCaml")
  (depends ocaml

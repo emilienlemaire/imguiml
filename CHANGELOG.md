@@ -2,6 +2,10 @@
 
 ## v1.93.0 (unreleased)
 
+A fork of imguiml, published as `imguiml-ft`: the libraries are
+`imguiml-ft` and `imguiml-ft.imguiml_impl` (and so on), with the same
+modules as imguiml's.
+
 ### Dear ImGui 1.93.0
 
 - Dear ImGui 1.93.0 (docking), from 1.90.6: cimgui's `1.93dock` tag,

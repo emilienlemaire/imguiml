@@ -20,7 +20,7 @@
 
 (library
  (name cimgui_types)
- (public_name imguiml.cimgui_types)
+ (public_name imguiml-ft.cimgui_types)
  (modules cimgui_types)
  (libraries ctypes ctypes-foreign))
 
@@ -40,7 +40,7 @@
 
 (library
  (name cimgui_enums)
- (public_name imguiml.cimgui_enums)
+ (public_name imguiml-ft.cimgui_enums)
  (modules cimgui_enums)
  (libraries cimgui_types ctypes ctypes.stubs))
 
@@ -81,7 +81,7 @@
 
 (library
  (name cimgui_enums_generated)
- (public_name imguiml.cimgui_enums_generated)
+ (public_name imguiml-ft.cimgui_enums_generated)
  (modules cimgui_enums_generated)
  (libraries ctypes))
 
@@ -101,7 +101,7 @@
 
 (library
  (name cimgui_base_structs)
- (public_name imguiml.cimgui_base_structs)
+ (public_name imguiml-ft.cimgui_base_structs)
  (modules cimgui_base_structs)
  (libraries
   cimgui_types
@@ -147,7 +147,7 @@
 
 (library
  (name cimgui_base_structs_generated)
- (public_name imguiml.cimgui_base_structs_generated)
+ (public_name imguiml-ft.cimgui_base_structs_generated)
  (modules cimgui_base_structs_generated)
  (libraries ctypes))
 
@@ -167,7 +167,7 @@
 
 (library
  (name cimgui_structs1)
- (public_name imguiml.cimgui_structs1)
+ (public_name imguiml-ft.cimgui_structs1)
  (modules cimgui_structs1)
  (libraries
   cimgui_types
@@ -216,7 +216,7 @@
 
 (library
  (name cimgui_structs1_generated)
- (public_name imguiml.cimgui_structs1_generated)
+ (public_name imguiml-ft.cimgui_structs1_generated)
  (modules cimgui_structs1_generated)
  (libraries ctypes))
 
@@ -236,7 +236,7 @@
 
 (library
  (name cimgui_structs2)
- (public_name imguiml.cimgui_structs2)
+ (public_name imguiml-ft.cimgui_structs2)
  (modules cimgui_structs2)
  (libraries
   cimgui_types
@@ -287,7 +287,7 @@
 
 (library
  (name cimgui_structs2_generated)
- (public_name imguiml.cimgui_structs2_generated)
+ (public_name imguiml-ft.cimgui_structs2_generated)
  (modules cimgui_structs2_generated)
  (libraries ctypes))
 
@@ -307,7 +307,7 @@
 
 (library
  (name cimgui_bindings)
- (public_name imguiml.cimgui_bindings)
+ (public_name imguiml-ft.cimgui_bindings)
  (modules cimgui_bindings)
  (libraries
   ctypes
@@ -336,7 +336,7 @@
 
 (library
  (name cimgui_bindings_generated)
- (public_name imguiml.cimgui_bindings_generated)
+ (public_name imguiml-ft.cimgui_bindings_generated)
  (modules cimgui_bindings_generated)
  (foreign_stubs
   (language c)
@@ -351,9 +351,9 @@
 
 (library
  (name imguiml)
- (public_name imguiml)
+ (public_name imguiml-ft)
  (modules imguiml)
  (libraries
-  imguiml.cimgui
-  imguiml.cimgui_bindings
-  imguiml.cimgui_bindings_generated))
+  imguiml-ft.cimgui
+  imguiml-ft.cimgui_bindings
+  imguiml-ft.cimgui_bindings_generated))
